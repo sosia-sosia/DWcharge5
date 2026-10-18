@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DUNGEON WALKER">
-<title>DUNGEON WALKER DWCver436</title>
+<title>DUNGEON WALKER DWCver437</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 :root{--bg:#07050e;--panel:#110d1a;--panel2:#180f28;--border:#2a1e42;--gold:#c9a84c;--text:#e8dcc8;--dim:#5a4a3a;--common:#8a9aaa;--uncommon:#50b450;--rare:#4a8aff;--epic:#d040ff;--legendary:#ff9500;}
@@ -821,7 +821,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 
 <div id="tap-to-start-screen" style="display:none;position:fixed;inset:0;background:#07050e;z-index:1100;align-items:center;justify-content:center;flex-direction:column;gap:24px;cursor:pointer;touch-action:manipulation;transition:opacity .3s;opacity:1;">
   <div style="font-family:'Cinzel',serif;font-size:22px;color:#c9a84c;letter-spacing:6px;text-shadow:0 0 24px rgba(201,168,76,.8);animation:logo-pulse 1.5s ease-in-out infinite;">DUNGEON WALKER</div>
-  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v436</div>
+  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v437</div>
   <div style="font-family:'Cinzel',serif;font-size:13px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;">▶ TAP TO START</div>
 </div>
 <div id="opening-screen" style="display:none;position:fixed;inset:0;background:#000;z-index:1004;opacity:1;touch-action:none;overflow:hidden;">
@@ -855,7 +855,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
     <div style="font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#b8d4ff;letter-spacing:8px;text-shadow:0 0 20px rgba(100,160,255,.8),0 0 40px rgba(100,160,255,.3),1px 1px 0 #0a2060;text-align:center;">CHARGE</div>
     <div style="height:2px;width:220px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin-top:6px;"></div>
     <div style="font-family:'Cinzel',serif;font-size:10px;color:rgba(201,168,76,.5);letter-spacing:3px;">CARD BATTLE RPG</div>
-    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver436</div>
+    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver437</div>
     <div style="font-family:'Cinzel',serif;font-size:12px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;margin-top:10px;">▶ TAP TO START</div>
   </div>
 
@@ -12531,20 +12531,38 @@ function playOpening(onDone){
       stopAll('error'); return;
     }
     // 音楽（OP専用。ロゴ画面・タイトル画面では鳴らさない）
+    // ズレ対策：音声を十分に読み込んでから再生し、「実際に鳴り始めた瞬間」を映像の時間0にする。
+    //           さらに再生中は毎フレーム、音声の再生位置に映像の時計を合わせ続ける。
+    let a=null;
+    const startVideoClock=()=>{
+      if(S.runStarted||S.done) return; S.runStarted=true;
+      const st=(D.music&&D.music.startTime)||0;
+      S.musicStart=st;
+      S.t0=performance.now()-((a&&a.currentTime>0)?(a.currentTime-st)*1000:0);
+      S.raf=requestAnimationFrame(frame);
+    };
     try{
       if(D.music&&D.music.file){
-        const a=new Audio(OPENING_ASSET_BASE+D.music.file);
+        a=new Audio(); a.preload='auto';
         a.volume=Math.max(0,Math.min(1,D.music.volume==null?1:D.music.volume));
         a.muted=(typeof isMuted==='function')?isMuted():false;
-        a.currentTime=0;
-        const st=D.music.startTime||0;
-        if(st>0){ a.addEventListener('loadedmetadata',()=>{ try{a.currentTime=st;}catch(e){} },{once:true}); }
-        a.play().catch(()=>{});
         S.audio=a;
-      }
-    }catch(e){}
-    S.t0=performance.now();
-    S.raf=requestAnimationFrame(frame);
+        const st=D.music.startTime||0;
+        let launched=false;
+        const launch=()=>{
+          if(launched||S.done) return; launched=true;
+          try{ if(st>0) a.currentTime=st; }catch(e){}
+          a.addEventListener('playing',startVideoClock,{once:true});   // 実際に音が出始めた瞬間に映像開始
+          const pr=a.play();
+          if(pr&&pr.catch) pr.catch(()=>{ S.audioFailed=true; startVideoClock(); }); // 再生拒否→映像だけ進める
+          S.timers.push(setTimeout(startVideoClock,2500));              // 保険：鳴り始めが検知できなくても進行
+        };
+        a.addEventListener('canplaythrough',launch,{once:true});
+        S.timers.push(setTimeout(launch,6000));                         // 読み込みが長い場合の見切り発車
+        a.addEventListener('error',()=>{ S.audio=null; startVideoClock(); },{once:true});
+        a.src=OPENING_ASSET_BASE+D.music.file; a.load();
+      } else { startVideoClock(); }
+    }catch(e){ startVideoClock(); }
   }
 
   // ---- 描画 ----
@@ -12645,7 +12663,14 @@ function playOpening(onDone){
   function frame(){
     if(S.done) return;
     try{
-      const t=(performance.now()-S.t0)/1000;
+      let t=(performance.now()-S.t0)/1000;
+      const _au=S.audio;
+      if(_au&&!S.audioFailed&&!_au.paused&&_au.currentTime>0){
+        const at=_au.currentTime-(S.musicStart||0);
+        const drift=at-t;
+        if(Math.abs(drift)>0.25){ S.t0=performance.now()-at*1000; t=at; }       // 大きなズレは即座に合わせる
+        else if(Math.abs(drift)>0.02){ S.t0-=drift*1000*0.15; t+=drift*0.15; }   // 小さなズレは少しずつ寄せる
+      }
       const end=D.ending.endTime;
       const g=ctx;
       g.setTransform(1,0,0,1,0,0); g.fillStyle='#000'; g.fillRect(0,0,canvas.width,canvas.height);
