@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DUNGEON WALKER">
-<title>DUNGEON WALKER DWCver431</title>
+<title>DUNGEON WALKER DWCver435</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 :root{--bg:#07050e;--panel:#110d1a;--panel2:#180f28;--border:#2a1e42;--gold:#c9a84c;--text:#e8dcc8;--dim:#5a4a3a;--common:#8a9aaa;--uncommon:#50b450;--rare:#4a8aff;--epic:#d040ff;--legendary:#ff9500;}
@@ -821,7 +821,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 
 <div id="tap-to-start-screen" style="display:none;position:fixed;inset:0;background:#07050e;z-index:1100;align-items:center;justify-content:center;flex-direction:column;gap:24px;cursor:pointer;touch-action:manipulation;transition:opacity .3s;opacity:1;">
   <div style="font-family:'Cinzel',serif;font-size:22px;color:#c9a84c;letter-spacing:6px;text-shadow:0 0 24px rgba(201,168,76,.8);animation:logo-pulse 1.5s ease-in-out infinite;">DUNGEON WALKER</div>
-  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v431</div>
+  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v435</div>
   <div style="font-family:'Cinzel',serif;font-size:13px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;">▶ TAP TO START</div>
 </div>
 <div id="op-screen" style="display:none;position:fixed;inset:0;background:#000;z-index:1003;align-items:center;justify-content:center;opacity:0;transition:opacity .5s;pointer-events:all;touch-action:none;">
@@ -855,7 +855,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
     <div style="font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#b8d4ff;letter-spacing:8px;text-shadow:0 0 20px rgba(100,160,255,.8),0 0 40px rgba(100,160,255,.3),1px 1px 0 #0a2060;text-align:center;">CHARGE</div>
     <div style="height:2px;width:220px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin-top:6px;"></div>
     <div style="font-family:'Cinzel',serif;font-size:10px;color:rgba(201,168,76,.5);letter-spacing:3px;">CARD BATTLE RPG</div>
-    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver431</div>
+    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver435</div>
     <div style="font-family:'Cinzel',serif;font-size:12px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;margin-top:10px;">▶ TAP TO START</div>
   </div>
 
@@ -1265,6 +1265,16 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
         </div>
         <div style="font-size:10px;color:#4aff88;font-family:sans-serif;background:rgba(74,255,136,.1);border:1px solid rgba(74,255,136,.4);border-radius:4px;padding:2px 8px;">プレイ可能</div>
       </div>
+      <!-- エリア11: 呪いの廃墟（深部） -->
+      <div id="area-btn-11" style="background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url(eria_noroi.png);background-size:cover;background-position:center;border:2px solid #6a4a94;border-radius:10px;padding:14px 18px;cursor:pointer;touch-action:manipulation;display:flex;align-items:center;gap:12px;min-height:84px;box-sizing:border-box;">
+        <div style="flex:1;">
+          <div style="font-family:'Cinzel',serif;font-size:14px;color:#9068c0;font-weight:bold;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,1);">呪いの廃墟（深部）</div>
+          <div style="font-size:10px;color:#aaa;font-family:sans-serif;margin-top:3px;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,1);">呪いに満ちた廃墟の深部 ★★★ 5ステージ</div>
+          <div id="area-clear-badge-11" style="display:none;font-size:9px;color:#ffd700;font-family:sans-serif;margin-top:3px;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,1);">🏆 クリア済み</div>
+          <div id="area-progress-11" style="display:none;font-size:9px;color:#8ab8d8;font-family:sans-serif;margin-top:2px;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,1);"></div>
+        </div>
+        <div style="font-size:10px;color:#4aff88;font-family:sans-serif;background:rgba(74,255,136,.1);border:1px solid rgba(74,255,136,.4);border-radius:4px;padding:2px 8px;">プレイ可能</div>
+      </div>
       <!-- エリア9: 帰らずの森 -->
       <div id="area-btn-9" style="background:linear-gradient(rgba(0,0,0,.28),rgba(0,0,0,.28)),url(eria_mori.png);background-size:cover;background-position:center;border:2px solid #4a8c5a;border-radius:10px;padding:14px 18px;cursor:pointer;touch-action:manipulation;display:flex;align-items:center;gap:12px;min-height:84px;box-sizing:border-box;">
         <div style="flex:1;">
@@ -1272,6 +1282,16 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
           <div style="font-size:10px;color:#aaa;font-family:sans-serif;margin-top:3px;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,1);">一度入ると戻れない森 ★ 5ステージ</div>
           <div id="area-clear-badge-9" style="display:none;font-size:9px;color:#ffd700;font-family:sans-serif;margin-top:3px;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,1);">🏆 クリア済み</div>
           <div id="area-progress-9" style="display:none;font-size:9px;color:#8ab8d8;font-family:sans-serif;margin-top:2px;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,1);"></div>
+        </div>
+        <div style="font-size:10px;color:#4aff88;font-family:sans-serif;background:rgba(74,255,136,.1);border:1px solid rgba(74,255,136,.4);border-radius:4px;padding:2px 8px;">プレイ可能</div>
+      </div>
+      <!-- エリア12: 帰らずの森（深部） -->
+      <div id="area-btn-12" style="background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url(eria_mori.png);background-size:cover;background-position:center;border:2px solid #2c5c38;border-radius:10px;padding:14px 18px;cursor:pointer;touch-action:manipulation;display:flex;align-items:center;gap:12px;min-height:84px;box-sizing:border-box;">
+        <div style="flex:1;">
+          <div style="font-family:'Cinzel',serif;font-size:14px;color:#3ca84e;font-weight:bold;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,1);">帰らずの森（深部）</div>
+          <div style="font-size:10px;color:#aaa;font-family:sans-serif;margin-top:3px;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,1);">生命を吸収する森の深部 ★★★ 5ステージ</div>
+          <div id="area-clear-badge-12" style="display:none;font-size:9px;color:#ffd700;font-family:sans-serif;margin-top:3px;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,1);">🏆 クリア済み</div>
+          <div id="area-progress-12" style="display:none;font-size:9px;color:#8ab8d8;font-family:sans-serif;margin-top:2px;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 6px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,1);"></div>
         </div>
         <div style="font-size:10px;color:#4aff88;font-family:sans-serif;background:rgba(74,255,136,.1);border:1px solid rgba(74,255,136,.4);border-radius:4px;padding:2px 8px;">プレイ可能</div>
       </div>
@@ -1831,6 +1851,8 @@ const AREA_CHARGE_ALLOWED={
   8: ['renGeki','jikoSaisei'],                  // 呪いの廃墟：格闘家・僧侶
   9: ['renGeki','inori'],                       // 帰らずの森：格闘家・祈祷師
   10:['tameAtk','jikoSaisei','teppeki'],         // 機械帝国：重戦士・僧侶・守護者
+  11:['renGeki','jikoSaisei'],                  // 呪いの廃墟（深部）：前提ダンジョンと同じ（格闘家・僧侶）
+  12:['renGeki','inori'],                       // 帰らずの森（深部）：前提ダンジョンと同じ（格闘家・祈祷師）
 };
 // エリアごとの「クリアしやすいおすすめチャージ」表示用
 const AREA_RECOMMENDED_CHARGE={
@@ -2084,6 +2106,12 @@ function getBgImg(stage){
   if(G.areaId===9){
     return stage>=4?'bg_mori2.png':'bg_mori1.png';
   }
+  if(G.areaId===11){
+    return stage>=4?'bg_noroi2.png':'bg_noroi1.png'; // 呪いの廃墟（深部）：既存背景を流用
+  }
+  if(G.areaId===12){
+    return stage>=4?'bg_mori2.png':'bg_mori1.png'; // 帰らずの森（深部）：既存背景を流用
+  }
   if(G.areaId===10){
     return stage>=10?'bg_kikai3.png':(stage>=6?'bg_kikai2.png':'bg_kikai1.png');
   }
@@ -2267,6 +2295,22 @@ const MORI_ENEMIES=[
   {name:'ﾓﾝｽﾀｰﾘｰﾌ',      icon:'🍃',hp:90,  atk:13, shield:0, rank:2, pattern:['drain','drain','def','big','drain'],     boss:false, img:'enemy_tuika33.png'},
   {name:'ｳｨｯﾌﾟﾌﾟﾗﾝﾄ',    icon:'🌿',hp:100, atk:15, shield:0, rank:3, pattern:['drain','bigdef','drain','big','drain'], boss:true,  img:'enemy_tuika34.png'},
 ];
+// エリア11：呪いの廃墟（深部）※ステージ1〜5固定（配列の並び順＝ステージ順）
+const NOROI_DEEP_ENEMIES=[
+  {name:'這い出す肖像',  icon:'🖼️',hp:120, atk:14, shield:10, rank:2, pattern:['bigcurse','bigdef','bigcurse','summon'],      boss:false, img:'enemy_tuika62.png'},
+  {name:'血宴の執事',    icon:'🩸',hp:180, atk:15, shield:15, rank:2, pattern:['bigcurse','bigcurse','drain','bigdef'],       boss:false, img:'enemy_tuika64.png'},
+  {name:'幽宴の淑女',    icon:'👻',hp:210, atk:16, shield:17, rank:3, pattern:['bigcurse','bigcurse','seal','bigheal'],       boss:false, img:'enemy_tuika63.png'},
+  {name:'魔宴のシャンデリア',icon:'🕯️',hp:250, atk:18, shield:20, rank:3, pattern:['bigcurse','big','bigcurse','big'],         boss:false, img:'enemy_tuika68.png'},
+  {name:'終宴の女王',    icon:'👑',hp:270, atk:21, shield:25, rank:5, pattern:['bigcurse','judgment','bigcurse','heavywound'],boss:true,  img:'BOSS_yu-risu.png'},
+];
+// エリア12：帰らずの森（深部）※ステージ1〜5固定（配列の並び順＝ステージ順）
+const MORI_DEEP_ENEMIES=[
+  {name:'森の衛兵',      icon:'🛡️',hp:180, atk:16, shield:0, rank:2, pattern:['drain','big','drain','big'],              boss:false, img:'enemy_tuika62.png'},
+  {name:'樹霊の魔導士',  icon:'🧙',hp:200, atk:18, shield:0, rank:2, pattern:['drain','bigcurse','drain','bigdef'],       boss:false, img:'enemy_tuika64.png'},
+  {name:'大腐食獣',      icon:'🦠',hp:250, atk:20, shield:0, rank:3, pattern:['drain','poisonfang','poisonatk','drain'], boss:false, img:'enemy_tuika63.png'},
+  {name:'朽葉の巨人',    icon:'🍂',hp:280, atk:22, shield:0, rank:3, pattern:['drain','quake','drain','quake'],          boss:false, img:'enemy_tuika71.png'},
+  {name:'古樹のトレント',icon:'🌳',hp:320, atk:24, shield:0, rank:5, pattern:['drain','soulcrush','drain','weaken_e'],    boss:true,  img:'BOSS_trento.png'},
+];
 const SANDBAG_ENEMY={name:'サンドバッグ（テスト用）',icon:'🛡️',hp:9999,atk:0,shield:0,pattern:['def'],boss:false,img:null};
 // 管理者パネル・モンスター画像確認で使う、全エリアの一覧（エリア選択画面と同じ並び順）。新エリア追加時はここに1行足すだけでよい。
 const ADMIN_AREA_LIST=[
@@ -2280,6 +2324,8 @@ const ADMIN_AREA_LIST=[
   {id:6, short:'氷壁', icon:'❄️', color:'#78c8f0'},
   {id:10,short:'機械', icon:'🤖', color:'#b0b8c8'},
   {id:1, short:'遺跡', icon:'🏚️', color:'#c9a84c'},
+  {id:11,short:'廃墟深', icon:'🏚️', color:'#8868a8'},
+  {id:12,short:'森深', icon:'🌲', color:'#3c8c4a'},
 ];
 // エリア効果：感電結界（雷鳴の高原）偶数ターンはカードコスト2倍
 function applyRaimeiCostMod(baseCost){
@@ -2302,6 +2348,8 @@ function getEnemiesForArea(areaId){
   if(areaId===8) return NOROI_ENEMIES;
   if(areaId===9) return MORI_ENEMIES;
   if(areaId===10) return MECH_ENEMIES;
+  if(areaId===11) return NOROI_DEEP_ENEMIES;
+  if(areaId===12) return MORI_DEEP_ENEMIES;
   return ENEMIES;
 }
 function getAreaEnemies(){
@@ -2909,7 +2957,7 @@ function _restoreBattleVisualsFromSavedState(){
   const _eaEl=document.getElementById('enemy-area');
   if(_eaEl){
     _eaEl.classList.remove('area-cave','area-ruins','area-temple','area-raimei','area-swamp','area-iron','area-ice','area-noroi','area-mori');
-    _eaEl.classList.add(G.areaId===0||G.areaId===7?'area-cave':G.areaId===1?'area-ruins':G.areaId===3?'area-raimei':G.areaId===4?'area-swamp':G.areaId===5?'area-iron':G.areaId===6?'area-ice':G.areaId===8?'area-noroi':G.areaId===9?'area-mori':'area-temple');
+    _eaEl.classList.add(G.areaId===0||G.areaId===7?'area-cave':G.areaId===1?'area-ruins':G.areaId===3?'area-raimei':G.areaId===4?'area-swamp':G.areaId===5?'area-iron':G.areaId===6?'area-ice':G.areaId===8?'area-noroi':G.areaId===9?'area-mori':G.areaId===11?'area-noroi':G.areaId===12?'area-mori':'area-temple');
   }
   const e=G.enemy;
   const sp=document.getElementById('enemy-sprite');
@@ -2999,6 +3047,8 @@ const AREA_REWARDS={
   8: {clearGold:10, clearCrystal:6,  noContinueGold:15, noContinueCrystal:9,  allChargeGold:20,  allChargeCrystal:10},
   9: {clearGold:9,  clearCrystal:6,  noContinueGold:13, noContinueCrystal:8,  allChargeGold:0,   allChargeCrystal:0},
   10:{clearGold:25, clearCrystal:12, noContinueGold:60, noContinueCrystal:35, allChargeGold:0,   allChargeCrystal:0},
+  11:{clearGold:40, clearCrystal:20, noContinueGold:45, noContinueCrystal:25, allChargeGold:0,   allChargeCrystal:0},
+  12:{clearGold:40, clearCrystal:20, noContinueGold:45, noContinueCrystal:25, allChargeGold:0,   allChargeCrystal:0},
 };
 // 全体共通報酬（クリア済みエリア数に応じて1回だけ付与）※未設定
 const GLOBAL_AREA_COUNT_REWARDS={2:null, 4:null, 6:null};
@@ -3500,7 +3550,7 @@ function _startStageBattle(){
     const _eaEl=document.getElementById('enemy-area');
     if(_eaEl){
       _eaEl.classList.remove('area-cave','area-ruins','area-temple','area-raimei','area-swamp','area-iron','area-ice','area-noroi','area-mori');
-      _eaEl.classList.add(G.areaId===0||G.areaId===7?'area-cave':G.areaId===1?'area-ruins':G.areaId===3?'area-raimei':G.areaId===4?'area-swamp':G.areaId===5?'area-iron':G.areaId===6?'area-ice':G.areaId===8?'area-noroi':G.areaId===9?'area-mori':'area-temple');
+      _eaEl.classList.add(G.areaId===0||G.areaId===7?'area-cave':G.areaId===1?'area-ruins':G.areaId===3?'area-raimei':G.areaId===4?'area-swamp':G.areaId===5?'area-iron':G.areaId===6?'area-ice':G.areaId===8?'area-noroi':G.areaId===9?'area-mori':G.areaId===11?'area-noroi':G.areaId===12?'area-mori':'area-temple');
     }
   }
   const e=getAreaEnemies()[G.stage];
@@ -3697,9 +3747,15 @@ function drawCards(n, isTurnStart=false){
   newCards.forEach(id=>{
     const c=DB[id];if(!c||c.type!=='bougai')return;
     if(c.effect&&c.effect.bougaiOnDraw==='poison4'){
-      G.playerPoison=(G.playerPoison||0)+4;
-      addLog('☠️ 猛毒牙D: 手札に入った！毒+4','enemy');
-      sfxPoison();
+      if(isTurnStart){
+        // ターン開始時のドローでは、直後の毒ダメージ処理で即座に消化されないよう、
+        // ターン開始時処理の最後（performPlayerTurnStart末尾）で付与する
+        G._pendingDrawPoison=(G._pendingDrawPoison||0)+4;
+      } else {
+        G.playerPoison=(G.playerPoison||0)+4;
+        addLog('☠️ 猛毒牙D: 手札に入った！毒+4','enemy');
+        sfxPoison();
+      }
     }
   });
   // 新規ドローカードのインデックスを記録
@@ -4091,7 +4147,7 @@ function playCard(idx, _isChain){
       // 魂喰らい：回復量を記録しておき演出はヒットアニメ内で行う
       if(G.soulEaterActive && d>0){const _seH=Math.floor(d/2)+(G.soulEaterBonus||0);if(_seH>0){G.playerHp=Math.min(G.playerMaxHp,G.playerHp+_seH);addLog('💀 魂喰らい: +'+_seH+' 回復','sys');}_seHealPerHit.push(_seH>0?_seH:0);}else{_seHealPerHit.push(0);}
       if(G.swiftBladeActive && d>=10){queueEffect(()=>{addLog('⚡ 加速する刃: ドロー1','sys');flashDrawCard(1);setTimeout(()=>{drawCards(1);renderHand();},500);}, 800);}
-      msgs.push(c.name+': '+d+'ダメ');
+      msgs.push(c.name+': '+d+'ダメ'+(miniBonus>0?'（ミニコンボ+'+miniBonus+'）':''));
     }
     // 解析斬・解析重斬：弱点付与（敵）
     if(ef.weaknessAtk){
@@ -4207,13 +4263,18 @@ function playCard(idx, _isChain){
     const atkCount=Math.max(0,(G.turnAtkCardCount-1));
     const _m3=(G.doubleNext)?(G.doubleMultiplier||2):1;
     if(G.doubleNext){G.doubleNext=false;G.doubleMultiplier=1;}
-    let d=(atkCount*ef.atkCardCountDmg+G.atkBuff+(G.stageAtkBonus||0))*_m3;
+    // ミニコンボ（コスト1以下）・最初の一撃（攻撃力強化2／次攻撃+X）も通常攻撃と同様に加算する
+    const _cbMini=(G.miniComboBuff&&c.cost<=1)?G.miniComboBuff:0;
+    const _cbFirst=(G.permAtkBuff2&&!G.usedFirstAtkBuff2)?G.permAtkBuff2:0;
+    if(G.permAtkBuff2&&!G.usedFirstAtkBuff2) G.usedFirstAtkBuff2=true;
+    const _cbNext=(G.nextAtkBuffVal||0); G.nextAtkBuffVal=0;
+    let d=(atkCount*ef.atkCardCountDmg+G.atkBuff+_cbMini+_cbFirst+_cbNext+(G.stageAtkBonus||0)+getSoulCardAtkBonus(c._baseId||c.id))*_m3;
     const _rawD_atkCardCount=d;
     if(G.enemyShield>0){const a=Math.min(G.enemyShield,d);G.enemyShield-=a;d-=a;}
     G.enemy.curHp=Math.max(0,G.enemy.curHp-d);
     if(G.soulEaterActive && d>0){const _seH=Math.floor(d/2)+(G.soulEaterBonus||0);if(_seH>0){G.playerHp=Math.min(G.playerMaxHp,G.playerHp+_seH);addLog('💀 魂喰らい: +'+_seH+' 回復','sys');queueEffect(()=>{spawnDmgNum('+'+_seH,'heal');sfxHeal();flashHealEffect(_seH);}, 1200);}}
     G.totalDmgDealt=(G.totalDmgDealt||0)+d;
-    msgs.push('連鎖爆発: 攻カード'+atkCount+'枚×5='+dmgLogStr(d,_rawD_atkCardCount));
+    msgs.push('連鎖爆発: 攻カード'+atkCount+'枚×5='+dmgLogStr(d,_rawD_atkCardCount)+(_cbMini>0?'（ミニコンボ+'+_cbMini+'）':'')+((_cbFirst+_cbNext)>0?'（最初の一撃+'+(_cbFirst+_cbNext)+'）':''));
     queueEffect(()=>{_updEnemyHpBar();spawnEnemyDmgNum(d,_rawD_atkCardCount);shakeEnemyArea();flashScreen('flash-gold');sfxDamage();}, 800);
   }
   if(ef.costSumDmg){
@@ -4323,53 +4384,20 @@ function playCard(idx, _isChain){
       msgs.push('敵ATK-'+ef.enemyAtkDebuff+'(1T)');
     }
   }
+  // 残影：直前に使ったカードの効果を、連鎖起動と同じ「再発動」経路（playCard(card,true)）で丸ごと再現する。
+  // （旧：攻撃・盾・回復など一部の効果だけを個別に再実装していたため、毒針の毒付与や狂撃のHP減少など
+  //   一部の効果が発動しなかった。再発動経路ならカード本来の処理がそのまま全て走る）
+  let _echoReplayCard=null;
   if(ef.echoLast){
     const echoId=prevCardId;
     if(echoId&&echoId!==cid&&DB[echoId]){
       const prevC=DB[echoId];
-      addLog('👥 残影: 「'+prevC.name+'」を再発動！','sys');
-      const pef=prevC.effect;
-      const echoMsgs=[];
-      if(pef.atk){
-        const t=pef.times||1;
-        if(pef.shieldBreak){echoMsgs.push('盾-'+pef.shieldBreak);G.enemyShield=Math.max(0,G.enemyShield-pef.shieldBreak);}
-        if(pef.shieldFirstBreak){const _sfb=Math.min(G.enemyShield,pef.shieldFirstBreak);G.enemyShield=Math.max(0,G.enemyShield-pef.shieldFirstBreak);echoMsgs.push('盾-'+pef.shieldFirstBreak+(_sfb>0?' ('+_sfb+'減少)':'(効果なし)'));}
-        if(pef.pierceBreak&&G.enemyShield>0){echoMsgs.push('敵盾破壊');G.enemyShield=0;}
-        for(let i=0;i<t;i++){
-          let d=(pef.atk+G.atkBuff+(G.stageAtkBonus||0))*(G.doubleNext&&i===0?(G.doubleMultiplier||2):1);
-          if(G.doubleNext&&i===0){G.doubleNext=false;G.doubleMultiplier=1;}
-          const _rawD_echo=d;
-          if(!pef.ignoreShield&&!pef.pierceBreak&&G.enemyShield>0){const a=Math.min(G.enemyShield,d);G.enemyShield-=a;d-=a;}
-          G.enemy.curHp=Math.max(0,G.enemy.curHp-d);
-          if(G.soulEaterActive && d>0){const _seH=Math.floor(d/2)+(G.soulEaterBonus||0);if(_seH>0){G.playerHp=Math.min(G.playerMaxHp,G.playerHp+_seH);addLog('💀 魂喰らい: +'+_seH+' 回復','sys');queueEffect(()=>{spawnDmgNum('+'+_seH,'heal');sfxHeal();flashHealEffect(_seH);}, 1200);}}
-          G.totalDmgDealt=(G.totalDmgDealt||0)+d;
-          echoMsgs.push(d+'ダメ');
-          (function(dmg,rawD){queueEffect(()=>{_updEnemyHpBar();spawnEnemyDmgNum(dmg,rawD);shakeEnemyArea();flashScreen('flash-gold');sfxDamage();}, 800);})(d,_rawD_echo);
-        }
+      if(prevC.effect&&prevC.effect.requireLowHp&&G.playerHp>10){
+        msgs.push('残影: 「'+prevC.name+'」はHP10以下でないと再発動できない');
+      } else {
+        addLog('👥 残影: 「'+prevC.name+'」を再発動！','sys');
+        _echoReplayCard=prevC;
       }
-      if(pef.atkPlusPrevHpLoss){
-        const prevLoss=G.prevTurnHpLoss||0;
-        const baseDmg=G.atkBuff+(G.stageAtkBonus||0)+(prevLoss>0?prevLoss:0);
-        const _mult=(G.doubleNext)?(G.doubleMultiplier||2):1;if(G.doubleNext){G.doubleNext=false;G.doubleMultiplier=1;}
-        let d=baseDmg*_mult;
-        const _rawD_atkPlusPrev=d;
-        if(G.enemyShield>0){const a=Math.min(G.enemyShield,d);G.enemyShield-=a;d-=a;}
-        G.enemy.curHp=Math.max(0,G.enemy.curHp-d);
-        if(G.soulEaterActive && d>0){const _seH=Math.floor(d/2)+(G.soulEaterBonus||0);if(_seH>0){G.playerHp=Math.min(G.playerMaxHp,G.playerHp+_seH);addLog('💀 魂喰らい: +'+_seH+' 回復','sys');queueEffect(()=>{spawnDmgNum('+'+_seH,'heal');sfxHeal();flashHealEffect(_seH);}, 1200);}}
-        G.totalDmgDealt=(G.totalDmgDealt||0)+d;
-        echoMsgs.push('殴り返し: '+d+'ダメ'+(prevLoss>0?' (前敵T減HP:'+prevLoss+'含む)':''));
-        (function(dmg,rawD){queueEffect(()=>{_updEnemyHpBar();spawnEnemyDmgNum(dmg,rawD);shakeEnemyArea();flashScreen('flash-gold');sfxDamage();}, 800);})(d,_rawD_atkPlusPrev);
-      }
-      if(pef.shield){const _ps=pef.shield;G.shield+=_ps;echoMsgs.push('盾+'+_ps);queueEffect(()=>{flashShield();flashShieldAdd('player',_ps);sfxShield();}, 800);}
-      if(pef.heal){G.playerHp=Math.min(G.playerMaxHp,G.playerHp+pef.heal);echoMsgs.push('HP+'+pef.heal);sfxHeal();queueEffect(()=>spawnDmgNum('+'+pef.heal,'heal'),270);}
-      if(pef.draw){echoMsgs.push(pef.draw+'枚ドロー');queueEffect(()=>{flashDrawCard(pef.draw);setTimeout(()=>{drawCards(pef.draw);renderHand();},500);}, 800);}
-      if(pef.poison){G.enemyPoison=(G.enemyPoison||0)+pef.poison;echoMsgs.push('毒'+pef.poison);}
-      if(pef.breakShield){G.enemyShield=0;echoMsgs.push('敵盾0に');}
-      if(pef.buff==='atk'){G.atkBuff+=pef.val;echoMsgs.push('攻撃+'+pef.val);queueEffect(()=>showEffectPopup('Ekougeki.png','攻撃力+'+pef.val,'#ff6b35'), 800);}
-      if(echoMsgs.length===0){ echoMsgs.push('この効果は再現できません'); }
-      addLog('👥 '+echoMsgs.join(' / '),'player');
-      updateUI();
-      checkEnemyDeath(); // HP0でもここではreturnしない（後続の効果ブロックを継続処理。最終判定は関数末尾）
     } else {
       msgs.push('残影: 前のカードなし');
     }
@@ -4538,7 +4566,7 @@ function playCard(idx, _isChain){
   // 迅速：1ターン1度フラグ
   if(ef.oncePerTurn){G.swiftUsedThisTurn=true;}
   // ミニコンボ：このターン1コストカード攻撃力+3
-  if(ef.miniComboBuff){G.miniComboBuff=(G.miniComboBuff||0)+3;msgs.push('1コストカード攻撃+3');}
+  if(ef.miniComboBuff){G.miniComboBuff=(G.miniComboBuff||0)+3;msgs.push('このターン、コスト1以下のカードの攻撃力+3（現在+'+G.miniComboBuff+'）');}
   // チャージ暴走：チャージ+2/HP-15
   if(ef.addCharge){
     const ac=ef.addCharge;
@@ -4958,6 +4986,8 @@ function playCard(idx, _isChain){
     if(_ct2) updateGaugeLamps(); // 満タン表示の更新のみ
   }
   updateUI();
+  // 鈍化・攻撃力ダウン等でこのカードが敵の次の行動のダメージを変えた場合、既に表示中の予告も更新する
+  if(G.enemy&&G.enemy.pattern) updateIntent();
   // 連鎖起動：このカードを2回発動するフラグ（連鎖起動自体は除く）
   if(G.doubleNextCard && c.id!=='chainStart'){
     G.doubleNextCard=false;
@@ -4966,6 +4996,15 @@ function playCard(idx, _isChain){
     G.chainNoSkill=false;
     playCard(c, true);
     G.chainNoSkill=savedChainNoSkill;
+  }
+  // 残影：直前カードの再発動（連鎖起動の2回発動フラグとは干渉させない）
+  if(_echoReplayCard){
+    const _savedDoubleNextCard=G.doubleNextCard;
+    const _savedChainNoSkill2=G.chainNoSkill;
+    G.doubleNextCard=false; G.chainNoSkill=false;
+    playCard(_echoReplayCard, true);
+    G.doubleNextCard=_savedDoubleNextCard; G.chainNoSkill=_savedChainNoSkill2;
+    G.lastUsedCardId=cid; // 直前カードの記録は残影自身に戻す
   }
   // 連鎖起動後にも念のためチェック
   checkEnemyDeath();
@@ -5127,19 +5166,40 @@ function processPlayerTurnEnd(onDone){
       if(_msMana>0){
         G.mana=0;
         const _msDmg=_msMana*3;
-        let dLeft=_msDmg;
-        if(G.enemyShield>0){const a=Math.min(G.enemyShield,dLeft);G.enemyShield-=a;dLeft-=a;}
-        G.enemy.curHp=Math.max(0,G.enemy.curHp-dLeft);
+        // 1マナごとに1撃（3ダメージ）。シールドを先に削りながら、各撃の実ダメージとHPを記録する
+        const _msHits=[];
+        let dLeft=0;
+        for(let i=0;i<_msMana;i++){
+          let hd=3;
+          if(G.enemyShield>0){const a=Math.min(G.enemyShield,hd);G.enemyShield-=a;hd-=a;}
+          G.enemy.curHp=Math.max(0,G.enemy.curHp-hd);
+          dLeft+=hd;
+          _msHits.push({dmg:hd,hp:G.enemy.curHp});
+        }
         G.totalDmgDealt=(G.totalDmgDealt||0)+dLeft;
         addLog('💥 マナストライク発動！ マナ'+_msMana+'消費→'+dmgLogStr(dLeft,_msDmg),'sys');
-        showTurnSlide('💥 マナストライク発動！ '+dmgLogStr(dLeft,_msDmg)+'！','#f39c12');
-        spawnEnemyDmgNum(dLeft,_msDmg); shakeEnemyArea(); flashScreen('flash-gold'); sfxDamage();
-        updateUI();
-        // 敵が倒れた場合はここで打ち切り、checkEnemyDeath()内の撃破演出→victory()の流れに任せる
-        // （倒れたのにnext()を呼んでしまうと、以降のターン終了処理や敵の行動が無駄に走り、
-        // 　ステージクリアがすぐ表示されない不具合の原因になっていた）
-        if(checkEnemyDeath()) return;
-        setTimeout(next,3300);
+        showTurnSlide('💥 マナストライク発動！ 残りマナ'+_msMana+'×3','#f39c12');
+        // 演出中はHPバーの自動同期を止め、各撃ごとに段階表示する
+        G._multiHitRevealPending=(G._multiHitRevealPending||0)+1;
+        const _msHpStart=_msHits.length?(_msHits[0].hp+_msHits[0].dmg):G.enemy.curHp;
+        _renderEnemyHpDisplay(_msHpStart,true);
+        const HIT_START=1300, HIT_GAP=420;
+        _msHits.forEach((h,i)=>{
+          setTimeout(()=>{
+            _renderEnemyHpDisplay(h.hp);
+            spawnDmgNum('-'+h.dmg,'enemy-dmg');
+            shakeEnemyArea(); flashScreen('flash-gold'); sfxDamage();
+          },HIT_START+i*HIT_GAP);
+        });
+        const _msEnd=HIT_START+_msHits.length*HIT_GAP+300;
+        setTimeout(()=>{
+          spawnDmgNum('💥合計 -'+dLeft,'enemy-dmg');
+          G._multiHitRevealPending=Math.max(0,(G._multiHitRevealPending||0)-1);
+          updateUI();
+          // 敵が倒れた場合はここで打ち切り、checkEnemyDeath()内の撃破演出→victory()の流れに任せる
+          if(checkEnemyDeath()) return;
+          setTimeout(next,900);
+        },_msEnd);
       } else {
         setTimeout(next,50); // 発動条件を満たさない場合は待たない
       }
@@ -5320,7 +5380,7 @@ function enemyTurn(){
       atk:'⚔️ 攻撃 '+ea,big:'💥 大攻撃 '+(ea*2),poisonatk:'☠️ 毒攻撃 '+ea,moudokuatk:'☠️💥 猛毒攻撃 '+(ea*2),iceshot:'❄️ 氷雪弾 '+ea,drain:'🩸 吸収攻撃 '+ea,
       def:'🛡️ 防御',bigdef:'🛡️ 大防御',superbigdef:'🛡️ 超防御',
       curse:'☠️ 呪い '+ea,bigcurse:'☠️ 大呪い '+(ea*2),heal:'💚 回復',bigheal:'💚 大回復',
-      summon:'🌑 召喚',quake:'🌍 地響き '+ea,seal:'🔒 封印 '+ea,poisonfang:'☠️ 猛毒牙 '+ea,
+      summon:'🌑 攻防一体',quake:'🌍 地響き '+ea,seal:'🔒 封印 '+ea,poisonfang:'☠️ 猛毒牙 '+ea,
       burn:'🔥 火傷 '+ea,ignite:'🔥 炎上 '+ea,bigignite:'🔥 大炎上 '+ea,superignite:'🔥 超炎上 '+ea,weaken_e:'💀 衰弱 '+ea,judgment:'⚖️ 裁き '+ea,heavywound:'💔 重傷 '+ea,
       soulcrush:'💀 魂砕き '+ea,curse_bind:'⛓️ 呪縛 '+ea,despair:'😈 絶望 '+ea,
       enervate:'😩 脱力 '+ea,reflect_e:'🔄 反射 '+ea,paralyze:'⚡ 麻痺 '+ea,analysis_attack:'🎯 解析攻撃 '+ea,
@@ -5448,7 +5508,7 @@ function enemyTurn(){
     }
     else if(act==='summon'){
       G.enemyShield+=15;
-      addLog('🌑 '+e.name+'が闇を召喚！シールド+15','enemy');
+      addLog('🌑 '+e.name+'の攻防一体！シールド+15','enemy');
       updateUI();
       queueEffect(()=>{showEffectPopup('Etate.png','+15 シールド','#5dade2','enemy');sfxShield();}, 800);
       enemySpriteAttack();
@@ -5864,6 +5924,14 @@ function performPlayerTurnStart(isRestore){
     }
     // 聖域再生はプレイヤーターン終了時のみ処理する（旧：ここでも二重に回復していたバグを修正）
 
+    // 猛毒牙D：ターン開始ドローで引いた分の毒を、毒ダメージ処理の後に付与
+    if((G._pendingDrawPoison||0)>0){
+      const _pdp=G._pendingDrawPoison; G._pendingDrawPoison=0;
+      G.playerPoison=(G.playerPoison||0)+_pdp;
+      addLog('☠️ 猛毒牙D: 手札に入った！毒+'+_pdp+'（'+G.playerPoison+'T）','enemy');
+      sfxPoison();
+      updateUI();
+    }
     // オートエンドターン判定
     setTimeout(()=>{
       if(G.phase==='player'){
@@ -5920,7 +5988,7 @@ function dealToPlayer(dmg,lbl){
     G.mirrorActive=false;
     G.enemy.curHp=Math.max(0,G.enemy.curHp-dmg);
     addLog('🪞 魔鏡: '+dmg+'ダメ反射！','player');
-    queueEffect(()=>{_updEnemyHpBar();spawnDmgNum('-'+dmg,'enemy-dmg'); shakeEnemyArea(); flashScreen('flash-gold');}, 800);
+    queueEffect(()=>{_updEnemyHpBar();spawnDmgNum('-'+dmg,'enemy-dmg'); shakeEnemyArea(); flashScreen('flash-gold'); sfxDamage();}, 800);
     updateUI(); checkEnemyDeath();
     return 0; // 反射済みのため、プレイヤー自身はこの攻撃のダメージを受けない
   }
@@ -6020,7 +6088,7 @@ function dealDirectToPlayer(dmg,lbl){
     addLog('💪 驚異の生命力: 致死ダメを耐えた！','sys');
   }
   addLog('🔴 '+lbl+': HP-'+dmg+'（防御無視ダメージ）','enemy');
-  spawnDmgNum('-'+dmg,'player-dmg'); shakePlayerArea(); flashScreen('flash-red');
+  spawnDmgNum('-'+dmg,'player-dmg'); shakePlayerArea(); flashScreen('flash-red'); sfxDamage();
   updateUI(); if(G.playerHp<=0)defeat(G.enemy?(G.enemy.name+'の防御無視攻撃'):undefined);
 }
 // 現在プレイヤーに有効な被ダメージ軽減効果を考慮し、敵の攻撃が実際に何ダメージになるかを
@@ -6064,7 +6132,7 @@ function updateIntent(){
     bigcurse: '☠️☠️ 大呪い '+ea2CurseTxt,
     heal:     '💚 回復',
     bigheal:  '💚💚 大回復',
-    summon:   '🌑 召喚',
+    summon:   '🌑 攻防一体',
     quake:    '🌍 地響き '+eaTxt,
     seal:     '🔒 封印 '+eaTxt,
     poisonfang:'☠️ 猛毒牙 '+eaTxt,
@@ -6103,7 +6171,7 @@ function updateIntent(){
     bigcurse: '☠️☠️ 大呪い\nHP-'+ea2CurseTxt+'（防御無視・シールド貫通）',
     heal:     '💚 回復\n最大HPの10%を回復',
     bigheal:  '💚💚 大回復\n最大HPの20%を回復',
-    summon:   '🌑 召喚\nシールド+15 & 攻撃力+15（以降全攻撃に適用）',
+    summon:   '🌑 攻防一体\nシールド+15 & 攻撃力+15（以降全攻撃に適用）',
     quake:    '🌍 地響き\nダメージ: '+eaTxt+'\n次のプレイヤーターン中、コスト1のカードが使用不可',
     seal:     '🔒 封印\nダメージ: '+eaTxt+'\n次のターン、手札で最もコストの高いカードが使用不可',
     poisonfang:'☠️ 猛毒牙\nダメージ: '+eaTxt+'\n猛毒牙Dカード×2をデッキに追加（使用時HP-5・毒+3）',
@@ -6614,6 +6682,20 @@ function closeReward(){
     return;
   }
 
+  // ===== 5ステージ構成（呪いの廃墟・帰らずの森／深部）共通イベント =====
+  if(G.areaId===11||G.areaId===12){
+    if(G.stage===1||G.stage===3){
+      showCaveStatUpEvent(); // Stage1・3後：ステータス強化
+    } else if(G.stage===2){
+      showSmithEvent(); // Stage2後：鍛冶屋
+    } else if(G.stage===4){
+      showSuperStatUpEvent(); // Stage4後：超強化
+    } else {
+      startStage(); // Stage5後：イベントなし（victory側が自動的にクリア画面へ）
+    }
+    return;
+  }
+
   // ===== 忘却の遺跡 既存イベント =====
   if(G.stage===1){
     showStatUpEvent(true);
@@ -6647,6 +6729,7 @@ function showSpringOrSmithChoice(){
   const cb=document.getElementById('confirm-box');
   cb.classList.remove('show');
   const ov=document.getElementById('ov-statup');
+  if(ov._smithBg) restoreSmithBg();
   const title=ov.querySelector('.ov-title');
   if(title) title.textContent='📋 イベント選択';
   const sub=ov.querySelector('.ov-sub');
@@ -6657,7 +6740,7 @@ function showSpringOrSmithChoice(){
     {icon:'💧', name:'等価交換の泉', desc:'デッキから1枚を渡して、同レアリティ以下のカード1枚を獲得する',
      action:()=>{hideOv('ov-statup');showSpringEvent();}},
     {icon:'⚒️', name:'鍛冶屋', desc:'持っているカード1枚と同じ名前のカードを全て強化する（対象カードを持っている場合のみ）',
-     action:()=>{hideOv('ov-statup');showSmithEvent();}},
+     action:()=>{hideOv('ov-statup');showSmithEvent(true);}},
   ];
   choices.forEach(ch=>{
     const d=document.createElement('div');
@@ -6716,7 +6799,7 @@ function resetSmithKai(){
 }
 
 // 鍛冶屋イベント
-function showSmithEvent(){
+function showSmithEvent(fromChoice){
   // 背景をevent_kaji.pngに切り替え
   const ovStatup=document.getElementById('ov-statup');
   const origBg=ovStatup.style.backgroundImage;
@@ -6753,8 +6836,13 @@ function showSmithEvent(){
     list.appendChild(empty);
     const skipBtn=document.createElement('div');
     skipBtn.className='ov-btn';
-    skipBtn.textContent='スキップして次へ';
-    bindTouch(skipBtn,()=>{showSkipConfirm('本当にスキップしますか？',()=>{restoreSmithBg();hideOv('ov-statup');afterEventNext();});});
+    if(fromChoice){
+      skipBtn.textContent='イベント選択に戻る';
+      bindTouch(skipBtn,()=>{restoreSmithBg();hideOv('ov-statup');showSpringOrSmithChoice();});
+    } else {
+      skipBtn.textContent='スキップして次へ';
+      bindTouch(skipBtn,()=>{showSkipConfirm('本当にスキップしますか？',()=>{restoreSmithBg();hideOv('ov-statup');afterEventNext();});});
+    }
     list.appendChild(skipBtn);
     showOv('ov-statup');
     return;
@@ -6790,8 +6878,13 @@ function showSmithEvent(){
   // 選んでいない選択肢に再度戻ってしまう不具合があったため廃止し、afterEventNextへ統一）
   const bottomBtn=document.createElement('div');
   bottomBtn.className='ov-btn';
-  bottomBtn.textContent='スキップして次へ';
-  bindTouch(bottomBtn,()=>{showSkipConfirm('本当にスキップしますか？',()=>{restoreSmithBg();hideOv('ov-statup');afterEventNext();});});
+  if(fromChoice){
+    bottomBtn.textContent='イベント選択に戻る';
+    bindTouch(bottomBtn,()=>{restoreSmithBg();hideOv('ov-statup');showSpringOrSmithChoice();});
+  } else {
+    bottomBtn.textContent='スキップして次へ';
+    bindTouch(bottomBtn,()=>{showSkipConfirm('本当にスキップしますか？',()=>{restoreSmithBg();hideOv('ov-statup');afterEventNext();});});
+  }
   list.appendChild(bottomBtn);
 
   showOv('ov-statup');
@@ -7189,6 +7282,32 @@ const AREA_DATA = [
     allChargeCapReward: {category:1, amount:1},
     popupBg: 'pop_kikai.png',
   },
+  {
+    name: '呪いの廃墟（深部）',
+    icon: '🏚️',
+    stages: 5,
+    difficulty: '★★★',
+    desc: '呪いに満ちた廃墟の深部',
+    areaEffect: null,
+    soulReward: null,
+    capReward: {category:2, amount:1},
+    allChargeCapReward: {category:2, amount:1},
+    popupBg: 'pop_noroi.png',
+    requireArea: 8, // 前提ダンジョン：このエリアの全チャージクリアで解放
+  },
+  {
+    name: '帰らずの森（深部）',
+    icon: '🌲',
+    stages: 5,
+    difficulty: '★★★',
+    desc: '生命を吸収する森の深部',
+    areaEffect: null,
+    soulReward: null,
+    capReward: {category:1, amount:1},
+    allChargeCapReward: {category:1, amount:1},
+    popupBg: 'pop_mori.png',
+    requireArea: 9, // 前提ダンジョン：このエリアの全チャージクリアで解放
+  },
 ];
 // AREA_DATA定義後に配列長を揃える（エリア追加時に配列長が足りない場合は初期値で埋める）
 while(SAVE.clearedAreas.length<AREA_DATA.length) SAVE.clearedAreas.push(false);
@@ -7217,18 +7336,63 @@ while(SAVE.bestStage.length<AREA_DATA.length) SAVE.bestStage.push(0);
   writeSaveData();
 })();
 
+// ===== 段階的解放の判定 =====
+// エリア0（始まりの洞窟）をクリア済みか
+function isStartCaveCleared(){ return !!(SAVE.clearedAreas && SAVE.clearedAreas[0]); }
+// チュートリアル（isTutorial:true のエリア）を除いた、クリア済みダンジョン数
+function nonTutorialClearedCount(){
+  let n=0;
+  AREA_DATA.forEach((a,i)=>{ if(a && !a.isTutorial && SAVE.clearedAreas && SAVE.clearedAreas[i]) n++; });
+  return n;
+}
+// デッキ構築・ガチャの解放条件（チュートリアルを除く5ダンジョンクリア）
+function isDeckGachaUnlocked(){ return nonTutorialClearedCount()>=5; }
+// エリアidxの解放状態を判定する。{locked, reasonShort, reasonLong}を返す。
+function getAreaLockInfo(idx){
+  const area=AREA_DATA[idx];
+  if(idx===1 || idx===10){
+    // 忘却の遺跡・機械帝国：従来通りショップ購入で解放
+    if(!(SAVE.areasUnlocked && SAVE.areasUnlocked[idx])){
+      return {locked:true, reasonShort:'🔒 未解放（ショップで購入）', reasonLong:'「'+(area?area.name:'')+'」はショップで解放できます'};
+    }
+    return {locked:false};
+  }
+  if(area && area.isTutorial) return {locked:false}; // チュートリアルは常時解放
+  if(idx===0){
+    // 始まりの洞窟：チュートリアルを終えるまで解放しない
+    if(!SAVE.tutorialCleared){
+      return {locked:true, reasonShort:'🔒 未解放（チュートリアル完了で解放）', reasonLong:'「始まりの洞窟」はチュートリアルを終えると解放されます'};
+    }
+    return {locked:false};
+  }
+  if(area && area.requireArea!==undefined){
+    // 深部ダンジョン：前提ダンジョンの全チャージクリアで解放
+    const req=AREA_DATA[area.requireArea];
+    const reqCleared=!!(SAVE.clearedAreas && SAVE.clearedAreas[area.requireArea]);
+    if(!reqCleared || !isAllChargeCleared(area.requireArea)){
+      return {locked:true, reasonShort:'🔒 未解放（前提ダンジョンの全チャージクリアで解放）', reasonLong:'「'+(area?area.name:'')+'」は「'+(req?req.name:'')+'」の全チャージクリアで解放されます'};
+    }
+    return {locked:false};
+  }
+  // それ以外の通常ダンジョン：始まりの洞窟のクリアが必要
+  if(!isStartCaveCleared()){
+    return {locked:true, reasonShort:'🔒 未解放（始まりの洞窟クリアで解放）', reasonLong:'「'+(area?area.name:'')+'」は「始まりの洞窟」をクリアすると解放されます'};
+  }
+  return {locked:false};
+}
 function showAreaSelect(){
   showOv('ov-area-select');
   initAreaBackBtn();
-  [0,1,2,3,4,5,6,7,8,9,10].forEach(idx=>{
+  [0,1,2,3,4,5,6,7,8,9,10,11,12].forEach(idx=>{
     const btn=document.getElementById('area-btn-'+idx);
     const area=AREA_DATA[idx];
-    const locked = (idx===1 || idx===10) && !(SAVE.areasUnlocked && SAVE.areasUnlocked[idx]); // 忘却の遺跡・機械帝国はショップ購入で解放
+    const lockInfo=getAreaLockInfo(idx);
+    const locked=lockInfo.locked;
     if(btn){
       if(locked){
         btn.style.filter='grayscale(100%) brightness(0.5)';
         btn.style.cursor='default';
-        bindTapSafe('area-btn-'+idx, ()=>{ _deckEditShowMsg('🔒 「'+(area?area.name:'')+'」はショップで解放できます'); });
+        bindTapSafe('area-btn-'+idx, ()=>{ _deckEditShowMsg(lockInfo.reasonLong); });
       } else {
         btn.style.filter='';
         btn.style.cursor='pointer';
@@ -7242,7 +7406,7 @@ function showAreaSelect(){
     if(badge){
       if(locked){
         badge.style.display='block';
-        badge.textContent='🔒 未解放（ショップで購入）';
+        badge.textContent=lockInfo.reasonShort;
         badge.style.color='#e07070';
       } else {
         badge.style.display=cleared?'block':'none';
@@ -7331,7 +7495,7 @@ function showChargeSelect(){
     const _ccIdx=_chargeIdsAll.indexOf(ct.id);
     const isCleared=_ccIdx>=0 && !!_ccArr[_ccIdx];
     const isRecommended=AREA_RECOMMENDED_CHARGE[G.areaId]===ct.id;
-    d.style.cssText='position:relative;background:rgba(0,0,0,.85);border:2px solid '+ct.color+';border-radius:10px;padding:10px 12px;cursor:pointer;touch-action:manipulation;display:flex;align-items:center;gap:10px;min-height:88px;box-sizing:border-box;';
+    d.style.cssText='position:relative;background:rgba(0,0,0,.85);border:2px solid '+ct.color+';border-radius:10px;padding:10px 12px;cursor:pointer;touch-action:manipulation;display:flex;align-items:center;gap:10px;min-height:88px;flex-shrink:0;box-sizing:border-box;';
     // ランプ表示
     let lamps='';
     for(let i=0;i<ct.maxCount;i++) lamps+='<div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid '+ct.color+';display:inline-block;margin-right:2px;"></div>';
@@ -7339,7 +7503,7 @@ function showChargeSelect(){
     // アイコン：共通ヘルパーで画像優先表示（エラー時のみ絵文字）
     const chargeIconHtml_=chargeIconHtml(ct,32);
     d.innerHTML=chargeIconHtml_+`
-      <div style="flex:1;">
+      <div style="flex:1;min-width:0;word-break:break-all;overflow-wrap:anywhere;">
         <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;">
           <span style="font-family:'Cinzel',serif;font-size:14px;color:${ct.color};font-weight:bold;letter-spacing:1px;">${ct.name}</span>
           <span style="font-size:9px;color:#ccc;font-family:sans-serif;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:4px;padding:1px 6px;letter-spacing:.5px;">${trait}</span>
@@ -8867,7 +9031,8 @@ function renderHand(){
         case 'chainBlast':{
           const atkCount=Math.max(0,G.turnAtkCardCount);
           const cbBase=atkCount*5;
-          const dmg=_d(cbBase+_atk);
+          const _cbMiniP=(G.miniComboBuff&&c.cost<=1)?G.miniComboBuff:0;
+          const dmg=_d(cbBase+_atk+_cbMiniP+_firstHitExtra+getSoulCardAtkBonus('chainBlast'));
           return '攻'+fmtStatArrow(cbBase,dmg)+'（攻カード'+atkCount+'枚）';
         }
         case 'accumulate':{
@@ -9164,20 +9329,21 @@ function renderHand(){
             const firstAtkBonus=(G.permAtkBuff2&&!G.usedFirstAtkBuff2)?G.permAtkBuff2:0;
             const nextAtkBonus=(G.nextAtkBuffVal||0);
             const firstHitExtra=firstAtkBonus+nextAtkBonus;
-            const atkExtra=_atk+soulAtkB+hpScaleExtra+firstHitExtra;
+            const miniExtra=(G.miniComboBuff&&c.cost<=1)?G.miniComboBuff:0; // ミニコンボ（コスト1以下・毎ヒットに乗る）
+            const atkExtra=_atk+soulAtkB+hpScaleExtra+firstHitExtra+miniExtra;
             const base=c.effect.atk;
             const dmg=_d(base+atkExtra);
             const total=dmg*t;
             const hpTag=hpScaleExtra>0?'<span style="color:#4ecdc4;font-size:8px;">(HP+'+hpScaleExtra+')</span>':'';
             // 血の契約・魂の契約等、自分のHPを消費して攻撃するカードは、その分も併記する
-            const selfDmgPart=c.effect.selfDmg?('HP-'+c.effect.selfDmg+' + '):'';
+            const selfDmgPart=c.effect.selfDmg?('HP-'+c.effect.selfDmg+' + '):((c.effect.selfHp&&c.effect.selfHp<0)?('HP-'+Math.abs(c.effect.selfHp)+' + '):'');
             if(t>1){
               // 弱点付与・最初の一撃ボーナスは1ヒット目にのみ乗る一時的な追加分のため、
               // per-hitの数値・合計には含めず別枠で示す（1ヒット目の実際の値と食い違うのを防ぐ）
               const wkExtra=G.enemyWeaknessCount||0;
               const firstHitTag=firstHitExtra>0?'<span style="color:#f39c12;font-size:9px;">(1発目+'+firstHitExtra+')</span>':'';
               const wkTag=wkExtra>0?'<span style="color:#ff6060;font-size:9px;">(1発目+'+wkExtra+')</span>':'';
-              const dmgNoFirst=_d(base+_atk+soulAtkB+hpScaleExtra);
+              const dmgNoFirst=_d(base+_atk+soulAtkB+hpScaleExtra+miniExtra);
               return selfDmgPart+'攻'+fmtStatArrow(base,dmgNoFirst)+'×'+t+'<br><span style="font-size:8px;color:#aaa;">合計'+fmtStatArrow(base*t,dmgNoFirst*t)+'</span>'+firstHitTag+wkTag+hpTag;
             }
             // 単発攻撃は、弱点付与・最初の一撃ボーナス分も含めた「実際に与えるダメージ」を現在値として表示する
@@ -13214,11 +13380,20 @@ function _bindTitleExtraButtons(){
   if(_titleExtraButtonsBound) { _updateMuteBtnLabel(); return; } // 二重登録防止：初回のみ実際にバインドする
   _titleExtraButtonsBound=true;
   bind('menu-btn-area',()=>{ showAreaSelect(); });
-  bind('menu-btn-soul',()=>{ sfxSelect(); showSoulSetupScreen(); });
-  bind('menu-btn-deck',()=>{ sfxSelect(); showDeckEditScreen(); });
+  bind('menu-btn-soul',()=>{
+    if(!isStartCaveCleared()){ dwRejectFeedback(document.getElementById('menu-btn-soul')); _deckEditShowMsg('🔒 「始まりの洞窟」をクリアすると解放されます'); return; }
+    sfxSelect(); showSoulSetupScreen();
+  });
+  bind('menu-btn-deck',()=>{
+    if(!isDeckGachaUnlocked()){ dwRejectFeedback(document.getElementById('menu-btn-deck')); _deckEditShowMsg('🔒 ダンジョンを5つクリアすると解放されます（チュートリアルを除く／現在'+nonTutorialClearedCount()+'/5）'); return; }
+    sfxSelect(); showDeckEditScreen();
+  });
   bind('btn-deck-edit-close',()=>{ sfxBack(); hideOv('ov-deck-edit'); });
   bind('menu-btn-gamedata',()=>{ sfxSelect(); showGameDataScreen(); });
-  bind('menu-btn-shop',()=>{ sfxSelect(); showShopScreen(); });
+  bind('menu-btn-shop',()=>{
+    if(!isStartCaveCleared()){ dwRejectFeedback(document.getElementById('menu-btn-shop')); _deckEditShowMsg('🔒 「始まりの洞窟」をクリアすると解放されます'); return; }
+    sfxSelect(); showShopScreen();
+  });
   bind('btn-shop-back', _shopNavBack);
   bind('sc-ok',()=>{
     if(!_shopConfirmItem) return;
@@ -13230,7 +13405,10 @@ function _bindTitleExtraButtons(){
     _buyShopItem(it);
   });
   bind('sc-cancel',()=>{ sfxCancel(); _shopConfirmItem=null; hideOv('ov-shop-confirm'); });
-  bind('menu-btn-gacha',()=>{ sfxSelect(); showGachaSelectScreen(); });
+  bind('menu-btn-gacha',()=>{
+    if(!isDeckGachaUnlocked()){ dwRejectFeedback(document.getElementById('menu-btn-gacha')); _deckEditShowMsg('🔒 ダンジョンを5つクリアすると解放されます（チュートリアルを除く／現在'+nonTutorialClearedCount()+'/5）'); return; }
+    sfxSelect(); showGachaSelectScreen();
+  });
   bind('btn-gacha-select-back',()=>{ sfxBack(); hideOv('ov-gacha-select'); });
   bind('gacha-back-to-select',()=>{ sfxBack(); hideOv('ov-gacha-common'); showGachaSelectScreen(); });
   bind('gacha-buy-gold',()=>{ _showGachaBuyConfirm('gold'); });
@@ -13288,10 +13466,40 @@ function _bindTitleExtraButtons(){
   _initMenuImgFallbacks();
 }
 _bindTitleExtraButtons();
+// 段階的解放：ソウル・ショップ・デッキ・ガチャの各ボタンを、未解放なら暗くして🔒バッジを出す
+function _updateMenuLockVisuals(){
+  const defs=[
+    {id:'menu-btn-soul',  unlocked:isStartCaveCleared()},
+    {id:'menu-btn-shop',  unlocked:isStartCaveCleared()},
+    {id:'menu-btn-deck',  unlocked:isDeckGachaUnlocked()},
+    {id:'menu-btn-gacha', unlocked:isDeckGachaUnlocked()},
+  ];
+  defs.forEach(d=>{
+    const btn=document.getElementById(d.id);
+    if(!btn) return;
+    let lockBadge=btn.querySelector('.menu-lock-badge');
+    if(d.unlocked){
+      btn.style.filter='';
+      if(lockBadge) lockBadge.style.display='none';
+    } else {
+      btn.style.filter='grayscale(100%) brightness(0.45)';
+      if(btn.style.position!=='relative' && btn.style.position!=='absolute') btn.style.position='relative';
+      if(!lockBadge){
+        lockBadge=document.createElement('span');
+        lockBadge.className='menu-lock-badge';
+        lockBadge.textContent='🔒';
+        lockBadge.style.cssText='position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:22px;filter:none;text-shadow:0 2px 6px rgba(0,0,0,.9);z-index:3;pointer-events:none;';
+        btn.appendChild(lockBadge);
+      }
+      lockBadge.style.display='block';
+    }
+  });
+}
 // メインメニュー画面を表示（タイトルの「はじめる」タップ後、最初に表示される選択画面）
 function showMainMenu(){
   showOv('ov-main-menu');
   _updateShopNewBadge();
+  _updateMenuLockVisuals();
 }
 
 // ===== ゲームデータ画面（モンスター図鑑・カード図鑑） =====
@@ -14205,7 +14413,7 @@ const ACTION_DESC={
   bigcurse:   {name:'大呪い💀', desc:'シールドを無視する直接ダメージ（通常の2倍）を与える。'},
   heal:       {name:'回復💚', desc:'自身の最大HPの10%を回復する。'},
   bigheal:    {name:'大回復💚💚', desc:'自身の最大HPの20%を回復する。'},
-  summon:     {name:'召喚🌑', desc:'シールド+15、さらに攻撃15のダメージを与える。'},
+  summon:     {name:'攻防一体🌑', desc:'シールド+15、さらに攻撃15のダメージを与える。'},
   quake:      {name:'地響き🌍', desc:'攻撃に加え、次のプレイヤーターン中はコスト1のカードが使用不可になる。'},
   seal:       {name:'封印🔒', desc:'攻撃に加え、次のターン中は最もコストの高いカードが使用不可になる。'},
   poisonfang: {name:'猛毒牙☠️', desc:'攻撃に加え、デッキに「猛毒牙D」を2枚追加する。'},
