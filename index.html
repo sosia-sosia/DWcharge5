@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DUNGEON WALKER">
-<title>DUNGEON WALKER DWCver437</title>
+<title>DUNGEON WALKER DWCver438</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 :root{--bg:#07050e;--panel:#110d1a;--panel2:#180f28;--border:#2a1e42;--gold:#c9a84c;--text:#e8dcc8;--dim:#5a4a3a;--common:#8a9aaa;--uncommon:#50b450;--rare:#4a8aff;--epic:#d040ff;--legendary:#ff9500;}
@@ -51,6 +51,15 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
     transform:translateX(-50%) !important;
   }
 }
+
+
+/* ===== メインメニュー背景：上から下へ流れ、上下がつながってループ ===== */
+#menu-bg-wrap{position:sticky;top:0;flex:0 0 0;height:0;width:calc(100% + 28px);margin:-16px -14px 16px;z-index:-1;pointer-events:none;}
+#menu-bg-view{position:absolute;left:0;top:0;width:100%;height:100vh;height:100dvh;overflow:hidden;}
+#menu-bg-scroll{position:absolute;left:0;width:100%;background-image:url(munyu_haikei.png);background-repeat:repeat-y;background-position:0 0;
+  --tile-h:800px;top:calc(-1 * var(--tile-h));height:calc(100% + var(--tile-h));
+  animation:menuBgFlow 20s linear infinite;will-change:transform;backface-visibility:hidden;}
+@keyframes menuBgFlow{from{transform:translate3d(0,0,0);}to{transform:translate3d(0,var(--tile-h),0);}}
 
 #top-bar{background:linear-gradient(180deg,#0c0818,#110d1a);border-bottom:1px solid rgba(201,168,76,.22);padding:7px 10px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;box-shadow:0 2px 16px rgba(0,0,0,.6);}
 .top-title{font-size:13px;color:var(--gold);letter-spacing:3px;text-shadow:0 0 12px rgba(201,168,76,.5);}
@@ -821,7 +830,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 
 <div id="tap-to-start-screen" style="display:none;position:fixed;inset:0;background:#07050e;z-index:1100;align-items:center;justify-content:center;flex-direction:column;gap:24px;cursor:pointer;touch-action:manipulation;transition:opacity .3s;opacity:1;">
   <div style="font-family:'Cinzel',serif;font-size:22px;color:#c9a84c;letter-spacing:6px;text-shadow:0 0 24px rgba(201,168,76,.8);animation:logo-pulse 1.5s ease-in-out infinite;">DUNGEON WALKER</div>
-  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v437</div>
+  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v438</div>
   <div style="font-family:'Cinzel',serif;font-size:13px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;">▶ TAP TO START</div>
 </div>
 <div id="opening-screen" style="display:none;position:fixed;inset:0;background:#000;z-index:1004;opacity:1;touch-action:none;overflow:hidden;">
@@ -855,7 +864,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
     <div style="font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#b8d4ff;letter-spacing:8px;text-shadow:0 0 20px rgba(100,160,255,.8),0 0 40px rgba(100,160,255,.3),1px 1px 0 #0a2060;text-align:center;">CHARGE</div>
     <div style="height:2px;width:220px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin-top:6px;"></div>
     <div style="font-family:'Cinzel',serif;font-size:10px;color:rgba(201,168,76,.5);letter-spacing:3px;">CARD BATTLE RPG</div>
-    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver437</div>
+    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver438</div>
     <div style="font-family:'Cinzel',serif;font-size:12px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;margin-top:10px;">▶ TAP TO START</div>
   </div>
 
@@ -996,6 +1005,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 
 <!-- メインメニュー（タイトルとエリア選択の間の選択画面／#appの外側に配置） -->
 <div class="overlay" id="ov-main-menu" style="gap:0;padding:16px 14px;position:fixed;z-index:1900;align-items:stretch;background-image:url(munyu_haikei.png);background-size:cover;background-position:center;">
+  <div id="menu-bg-wrap"><div id="menu-bg-view"><div id="menu-bg-scroll"></div></div></div>
   <div id="btn-menu-back" class="ov-btn" style="position:absolute;top:14px;right:14px;width:auto;font-size:13px;padding:8px 16px;z-index:2;">戻る</div>
   <div style="height:142px;flex-shrink:0;"></div>
   <div id="menu-btn-area" class="ov-btn" style="width:100%;height:90px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;background-image:url(menu_eria.png);background-size:cover;background-position:center;text-indent:-9999px;overflow:hidden;"></div>
@@ -13736,8 +13746,28 @@ function _updateMenuLockVisuals(){
   });
 }
 // メインメニュー画面を表示（タイトルの「はじめる」タップ後、最初に表示される選択画面）
+// 背景を「画像1枚分」ずつ下へ流し、上下がつながるようにループさせる。
+// 画像の表示高さ（=ループ1周の移動量）を実寸から求め、端数をなくして継ぎ目を防ぐ。
+const MENU_BG_SPEED_PX_PER_SEC=40; // 流れる速さ（大きいほど速い）
+let _menuBgImg=null;
+function setupMenuBgScroll(){
+  const el=document.getElementById('menu-bg-scroll'), view=document.getElementById('menu-bg-view');
+  if(!el||!view) return;
+  const apply=()=>{
+    const im=_menuBgImg; if(!im||!im.naturalWidth) return;
+    const w=Math.round(view.clientWidth||420); if(w<=0) return;
+    const tileH=Math.max(1,Math.round(w*im.naturalHeight/im.naturalWidth));
+    el.style.backgroundSize=w+'px '+tileH+'px';
+    el.style.setProperty('--tile-h',tileH+'px');
+    el.style.animationDuration=(tileH/MENU_BG_SPEED_PX_PER_SEC).toFixed(2)+'s';
+  };
+  if(_menuBgImg&&_menuBgImg.complete){ apply(); return; }
+  const im=new Image(); _menuBgImg=im; im.onload=apply; im.src='munyu_haikei.png';
+}
+window.addEventListener('resize',()=>{ try{ if(document.getElementById('ov-main-menu').classList.contains('show')) setupMenuBgScroll(); }catch(e){} });
 function showMainMenu(){
   showOv('ov-main-menu');
+  setupMenuBgScroll();
   _updateShopNewBadge();
   _updateMenuLockVisuals();
 }
