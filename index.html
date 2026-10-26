@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DUNGEON WALKER">
-<title>DUNGEON WALKER DWCver439</title>
+<title>DUNGEON WALKER DWCver445</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 :root{--bg:#07050e;--panel:#110d1a;--panel2:#180f28;--border:#2a1e42;--gold:#c9a84c;--text:#e8dcc8;--dim:#5a4a3a;--common:#8a9aaa;--uncommon:#50b450;--rare:#4a8aff;--epic:#d040ff;--legendary:#ff9500;}
@@ -41,8 +41,8 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
   /* #appの外側（body直下）にある起動シーケンス系の画面は、
      position:fixedのまま画面中央に420px幅で表示する */
   #start-screen,#tap-to-start-screen,
-  #company-logo-screen,#logo-screen,
-  #ov-admin,#ov-monster-viewer,#ov-save-delete-confirm,#ov-gamedata,#ov-achievements,#ov-main-menu,#ov-soul-setup,#ov-deck-edit,#ov-area-select,#ov-charge-select,#ov-shop,#ov-shop-confirm,#ov-rules,#ov-gacha-select,#ov-gacha-common,#ov-gacha-confirm,#ov-gacha-result{
+  #company-logo-screen,#logo-screen,#opening-screen,
+  #ov-admin,#ov-monster-viewer,#ov-save-delete-confirm,#ov-gamedata,#ov-achievements,#ov-main-menu,#ov-soul-setup,#ov-deck-edit,#ov-area-select,#ov-entry-scene,#ov-charge-select,#ov-shop,#ov-shop-confirm,#ov-rules,#ov-gacha-select,#ov-gacha-common,#ov-gacha-confirm,#ov-gacha-result{
     position:fixed !important;
     left:50% !important;
     right:auto !important;
@@ -60,6 +60,25 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
   --tile-h:800px;top:calc(-1 * var(--tile-h));height:calc(100% + var(--tile-h));
   animation:menuBgFlow 20s linear infinite;will-change:transform;backface-visibility:hidden;}
 @keyframes menuBgFlow{from{transform:translate3d(0,0,0);}to{transform:translate3d(0,var(--tile-h),0);}}
+
+/* ===== 入場シーン（メニュー→エリア選択／ショップ）：背景＋右寄りキャラ＋下側セリフ ===== */
+#ov-entry-scene{z-index:2100 !important;background:#000;padding:0;overflow:hidden;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;}
+#es-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;}
+#es-chara{position:absolute;right:0;top:50%;transform:translateY(-50%);height:78%;max-width:88%;width:auto;object-fit:contain;object-position:right center;pointer-events:none;}
+#es-box{position:absolute;left:12px;right:12px;bottom:calc(9% + env(safe-area-inset-bottom,0px));min-height:112px;box-sizing:border-box;padding:14px 16px 22px;
+  background:rgba(8,6,16,.86);border:1.5px solid rgba(212,175,90,.75);border-radius:10px;color:#f1ead8;font-family:'Noto Sans JP',sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.6);}
+#es-name{font-size:13px;color:#e0b95a;letter-spacing:2px;margin-bottom:6px;font-weight:bold;}
+#es-text{font-size:15px;line-height:1.7;white-space:pre-wrap;word-break:break-all;}
+#es-next{position:absolute;right:14px;bottom:6px;font-size:13px;color:#e0b95a;opacity:0;}
+#es-next.on{opacity:1;animation:esBlink 1s ease-in-out infinite;}
+@keyframes esBlink{0%,100%{transform:translateY(0);opacity:1;}50%{transform:translateY(3px);opacity:.45;}}
+
+/* OPスキップボタン：スマホのアドレスバー出入りで画面高さが変わっても、押そうとした位置から動かないようにする
+   （下端基準→「小ビューポート(svh)」基準の固定位置に変更。非対応ブラウザは従来の下端基準のまま） */
+@supports (height:100svh){
+  #opening-skip{bottom:auto !important;top:calc(100svh - 62px - env(safe-area-inset-bottom,0px)) !important;}
+}
+#opening-skip:active{background:rgba(0,0,0,.75);}
 
 #top-bar{background:linear-gradient(180deg,#0c0818,#110d1a);border-bottom:1px solid rgba(201,168,76,.22);padding:7px 10px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;box-shadow:0 2px 16px rgba(0,0,0,.6);}
 .top-title{font-size:13px;color:var(--gold);letter-spacing:3px;text-shadow:0 0 12px rgba(201,168,76,.5);}
@@ -830,7 +849,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 
 <div id="tap-to-start-screen" style="display:none;position:fixed;inset:0;background:#07050e;z-index:1100;align-items:center;justify-content:center;flex-direction:column;gap:24px;cursor:pointer;touch-action:manipulation;transition:opacity .3s;opacity:1;">
   <div style="font-family:'Cinzel',serif;font-size:22px;color:#c9a84c;letter-spacing:6px;text-shadow:0 0 24px rgba(201,168,76,.8);animation:logo-pulse 1.5s ease-in-out infinite;">DUNGEON WALKER</div>
-  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v439</div>
+  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v445</div>
   <div style="font-family:'Cinzel',serif;font-size:13px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;">▶ TAP TO START</div>
 </div>
 <div id="opening-screen" style="display:none;position:fixed;inset:0;background:#000;z-index:1004;opacity:1;touch-action:none;overflow:hidden;">
@@ -864,7 +883,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
     <div style="font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#b8d4ff;letter-spacing:8px;text-shadow:0 0 20px rgba(100,160,255,.8),0 0 40px rgba(100,160,255,.3),1px 1px 0 #0a2060;text-align:center;">CHARGE</div>
     <div style="height:2px;width:220px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin-top:6px;"></div>
     <div style="font-family:'Cinzel',serif;font-size:10px;color:rgba(201,168,76,.5);letter-spacing:3px;">CARD BATTLE RPG</div>
-    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver439</div>
+    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver445</div>
     <div style="font-family:'Cinzel',serif;font-size:12px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;margin-top:10px;">▶ TAP TO START</div>
   </div>
 
@@ -892,6 +911,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
       <div style="font-family:'Cinzel',serif;font-size:10px;color:#c9a84c;margin-bottom:6px;">⚔️ 開始ステージ ／ ⚡ チャージ</div>
       <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin-bottom:8px;" id="admin-stage-btns"></div>
       <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:center;" id="admin-charge-btns"></div>
+      <div id="admin-clear-toggle" style="margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px;padding:7px 8px;border-radius:7px;border:2px solid rgba(201,168,76,.4);background:rgba(0,0,0,.6);color:#c9a84c;cursor:pointer;touch-action:manipulation;font-size:11px;user-select:none;"></div>
     </div>
 
     <div style="background:rgba(0,0,0,.5);border:1px solid rgba(201,168,76,.3);border-radius:8px;padding:8px;">
@@ -1241,7 +1261,12 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 
 
 <!-- エリア選択・チャージ選択画面（タイトル/メニューから使うため#appの外側に配置） -->
-  <div class="overlay" id="ov-area-select" style="gap:14px;background-image:url(menubg_eria.png);background-size:cover;background-position:center;z-index:2000;position:fixed;">
+  <div class="overlay" id="ov-entry-scene" style="position:fixed;">
+  <div id="es-bg"></div>
+  <img id="es-chara" alt="" style="display:none;">
+  <div id="es-box"><div id="es-name"></div><div id="es-text"></div><div id="es-next">▼ タップ</div></div>
+</div>
+<div class="overlay" id="ov-area-select" style="gap:14px;background-image:url(menubg_eria.png);background-size:cover;background-position:center;z-index:2000;position:fixed;">
     <div class="ov-title" style="font-size:18px;">🗺️ エリア選択</div>
     <div style="display:flex;align-items:center;justify-content:space-between;width:100%;"><div class="ov-sub" style="color:#fff;font-weight:bold;font-style:normal;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.5);border-radius:8px;padding:5px 16px;letter-spacing:1px;">冒険するエリアを選択してください</div><div id="btn-area-back" style="background:rgba(0,0,0,.85);border:1px solid rgba(201,168,76,.5);border-radius:8px;padding:6px 14px;font-family:'Cinzel',serif;font-size:11px;color:#c9a84c;cursor:pointer;touch-action:manipulation;">← 戻る</div></div>
     <div style="display:flex;flex-direction:column;gap:10px;width:100%;padding:0 4px;">
@@ -7567,11 +7592,14 @@ function showChargeSelect(){
         G._inAreaRun = G.deck.some(id=>DB[id] && DB[id]._gachaGenerated);
         SAVE.pendingDisposal = G._inAreaRun ? {chargeId:ct.id} : null;
         writeSaveData();
-        hideOv('ov-charge-select');
-        hideOv('ov-area-select');
-        hideOv('ov-main-menu'); // メニュー画面が戦闘画面の手前に残らないよう非表示にする
-        updateGaugeLamps();
-        showStartScreen(()=>startStage());
+        // ステージへ移動する前に会話シーン（お気をつけて。）→ タップで従来どおり開始
+        playEntryScene('areaGo',()=>{
+          hideOv('ov-charge-select');
+          hideOv('ov-area-select');
+          hideOv('ov-main-menu'); // メニュー画面が戦闘画面の手前に残らないよう非表示にする
+          updateGaugeLamps();
+          showStartScreen(()=>startStage());
+        });
       });
     };
     bindTouch(d,pick);
@@ -11992,9 +12020,32 @@ function openAdminMode(){
     tabsContainer.appendChild(tab);
     tabEls[a.id]=tab;
   });
+  // 選択中ダンジョンの「クリア済み」ON/OFF（SAVE.clearedAreasを直接切り替え、即保存。報酬などは付与しない）
+  const clearTgl=document.getElementById('admin-clear-toggle');
+  const refreshClearToggle=()=>{
+    if(!clearTgl) return;
+    const nm=(AREA_DATA[adminAreaId]&&AREA_DATA[adminAreaId].name)||('エリア'+adminAreaId);
+    const on=!!(SAVE.clearedAreas&&SAVE.clearedAreas[adminAreaId]);
+    clearTgl.innerHTML='🏆 クリア済み：<b style="color:'+(on?'#9ee8ac':'#e08a8a')+';">'+(on?'ON':'OFF')+'</b><span style="font-size:9px;color:#888;">（'+nm+'）タップで切替</span>';
+    clearTgl.style.borderColor=on?'#7ec88c':'rgba(201,168,76,.4)';
+    clearTgl.style.background=on?'rgba(120,200,140,.15)':'rgba(0,0,0,.6)';
+  };
+  if(clearTgl){
+    const toggleClear=(e)=>{
+      e.stopPropagation(); if(e.cancelable) e.preventDefault();
+      SAVE.clearedAreas=SAVE.clearedAreas||[];
+      while(SAVE.clearedAreas.length<=adminAreaId) SAVE.clearedAreas.push(false);
+      SAVE.clearedAreas[adminAreaId]=!SAVE.clearedAreas[adminAreaId];
+      try{ writeSaveData(); }catch(err){ console.warn(err); }
+      refreshClearToggle();
+    };
+    clearTgl.onclick=null; clearTgl.ontouchend=null;
+    clearTgl.onclick=toggleClear; clearTgl.ontouchend=toggleClear;
+  }
   const setTab=(areaId)=>{
     adminAreaId=areaId;
     G.areaId=areaId;
+    refreshClearToggle();
     ADMIN_AREA_LIST.forEach(a=>{
       const t=tabEls[a.id];
       const on=a.id===areaId;
@@ -12504,7 +12555,7 @@ function playOpening(onDone){
 
   // ---- Canvasのサイズ調整（16:9ステージを画面内に収める＝PC/スマホ共通）----
   function fit(){
-    const vw=window.innerWidth, vh=window.innerHeight;
+    const vw=root.clientWidth||window.innerWidth, vh=root.clientHeight||window.innerHeight; // 画面（PCでは420px列）に合わせる
     const sc=Math.min(vw/SW,vh/SH);
     const w=Math.max(2,Math.floor(SW*sc)), h=Math.max(2,Math.floor(SH*sc));
     const dpr=Math.min(window.devicePixelRatio||1,2);
@@ -13297,7 +13348,7 @@ function _shopNavBack(){
     return;
   }
   sfxBack();
-  hideOv('ov-shop');
+  playEntryScene('shopExit',()=>{ hideOv('ov-shop'); }); // 退出時の会話 → タップでメニューへ
 }
 function renderShopContent(){
   const content=document.getElementById('shop-content');
@@ -13629,7 +13680,7 @@ var _titleExtraButtonsBound=false;
 function _bindTitleExtraButtons(){
   if(_titleExtraButtonsBound) { _updateMuteBtnLabel(); return; } // 二重登録防止：初回のみ実際にバインドする
   _titleExtraButtonsBound=true;
-  bind('menu-btn-area',()=>{ showAreaSelect(); });
+  bind('menu-btn-area',()=>{ playEntryScene('area',()=>{ showAreaSelect(); }); });
   bind('menu-btn-soul',()=>{
     if(!isStartCaveCleared()){ dwRejectFeedback(document.getElementById('menu-btn-soul')); _deckEditShowMsg('🔒 「始まりの洞窟」をクリアすると解放されます'); return; }
     sfxSelect(); showSoulSetupScreen();
@@ -13642,7 +13693,7 @@ function _bindTitleExtraButtons(){
   bind('menu-btn-gamedata',()=>{ sfxSelect(); showGameDataScreen(); });
   bind('menu-btn-shop',()=>{
     if(!isStartCaveCleared()){ dwRejectFeedback(document.getElementById('menu-btn-shop')); _deckEditShowMsg('🔒 「始まりの洞窟」をクリアすると解放されます'); return; }
-    sfxSelect(); showShopScreen();
+    sfxSelect(); playEntryScene('shop',()=>{ showShopScreen(); });
   });
   bind('btn-shop-back', _shopNavBack);
   bind('sc-ok',()=>{
@@ -13746,6 +13797,113 @@ function _updateMenuLockVisuals(){
   });
 }
 // メインメニュー画面を表示（タイトルの「はじめる」タップ後、最初に表示される選択画面）
+
+// ============================================================
+// 入場シーン：メニューからエリア選択／ショップへ入る時に挟む会話演出
+//  背景のみの画面に、右寄りでキャラ画像・下側にセリフ枠を表示し、ボイスを再生する。
+//  ボイスが終わってからタップで先へ進む。再生中のタップはスキップ（ボイス停止→次へ）。
+//  ★素材名・セリフはここで編集する（画像・音声はHTMLと同じフォルダに置く）。
+//    lines は複数行可（1行ごとにタップで進む）。voice を省略すると無音でセリフのみ表示。
+// ============================================================
+const ENTRY_SCENES={
+  area:{
+    bg:'menubg_eria.png',
+    chara:'chara_area.png',
+    charaHeight:78, // キャラ画像の表示高さ（画面の高さに対する%）。横幅は縦横比のまま自動
+    lines:[ {name:'', text:'こんにちは。どちらのクエストに挑戦されますか？', voice:'voice_area.mp3'} ]
+  },
+  shop:{
+    bg:'menubg_shop.png',
+    chara:'chara_shop.png',
+    charaHeight:78,
+    lines:[ {name:'', text:'いらっしゃい。何にする？', voice:'voice_shop.mp3'} ]
+  },
+  // ショップを出る時
+  shopExit:{
+    bg:'menubg_shop.png',
+    chara:'chara_shop.png',
+    charaHeight:78,
+    lines:[ {name:'', text:'まいど！またきてね。', voice:'voice_shop2.mp3'} ]
+  },
+  // エリア画面でチャージを選んだ後、ステージへ移動する前
+  areaGo:{
+    bg:'menubg_eria.png',
+    chara:'chara_area.png',
+    charaHeight:78,
+    lines:[ {name:'', text:'お気をつけて。', voice:'voice_area2.mp3'} ]
+  }
+};
+const ENTRY_SCENE_SKIP_DELAY_MS=1000; // 各セリフの表示開始から、この時間が経つまではタップ（スキップ・送り）を受け付けない
+let _entrySceneActive=false;
+function playEntryScene(key,onDone){
+  const cfg=ENTRY_SCENES[key];
+  let doneCalled=false;
+  const done=()=>{ if(doneCalled) return; doneCalled=true; try{ onDone&&onDone(); }catch(e){ console.warn(e); } };
+  const ov=document.getElementById('ov-entry-scene');
+  if(_entrySceneActive) return;                                   // 二重起動防止
+  if(!cfg||!Array.isArray(cfg.lines)||!cfg.lines.length||!ov){ done(); return; } // 設定が無ければ従来どおり即遷移
+  _entrySceneActive=true;
+  const bgEl=document.getElementById('es-bg'), chEl=document.getElementById('es-chara');
+  const nameEl=document.getElementById('es-name'), textEl=document.getElementById('es-text'), nextEl=document.getElementById('es-next');
+  bgEl.style.backgroundImage=cfg.bg?'url('+cfg.bg+')':'none';
+  chEl.style.display='none'; chEl.onload=()=>{ chEl.style.display='block'; }; chEl.onerror=()=>{ chEl.style.display='none'; };
+  chEl.style.height=(cfg.charaHeight||78)+'%';
+  if(cfg.chara){ chEl.src=cfg.chara; } else { chEl.removeAttribute('src'); }
+
+  let idx=0, audio=null, voiceDone=true, typeTimer=0, typing=false, lineText='', lineShownAt=Date.now(), closed=false;
+  const clearLine=()=>{
+    if(typeTimer){ clearInterval(typeTimer); typeTimer=0; }
+    if(audio){ try{ audio.onended=null; audio.onerror=null; audio.pause(); audio.removeAttribute('src'); audio.load(); }catch(e){} audio=null; }
+  };
+  function close(){
+    if(closed) return; closed=true;
+    clearLine();
+    ov.removeEventListener('click',onTap); ov.removeEventListener('touchend',onTap);
+    _entrySceneActive=false;
+    done();                       // 先に遷移先を表示してから
+    hideOv('ov-entry-scene');     // 会話画面を閉じる（ちらつき防止）
+  }
+  function voiceFinished(){
+    voiceDone=true;
+    if(typing){ finishTyping(); }
+    nextEl.classList.add('on');
+  }
+  function finishTyping(){
+    if(typeTimer){ clearInterval(typeTimer); typeTimer=0; }
+    typing=false; textEl.textContent=lineText;
+  }
+  function showLine(i){
+    clearLine();
+    const ln=cfg.lines[i];
+    lineShownAt=Date.now();
+    lineText=ln.text||''; nameEl.textContent=ln.name||''; nameEl.style.display=ln.name?'block':'none';
+    nextEl.classList.remove('on'); textEl.textContent='';
+    // セリフは1文字ずつ表示（ボイスの長さに依存しない固定速度）
+    typing=true; let n=0;
+    typeTimer=setInterval(()=>{ n++; textEl.textContent=lineText.slice(0,n); if(n>=lineText.length){ finishTyping(); } },35);
+    // ボイス再生。ミュート中・ファイル無し・再生失敗は「再生済み」と同じ扱い（進行が止まらない）
+    voiceDone=false;
+    if(ln.voice&&!isMuted()){
+      try{
+        const a=new Audio(ln.voice); audio=a; a.volume=1;
+        a.onended=voiceFinished; a.onerror=voiceFinished;
+        const pr=a.play(); if(pr&&pr.catch) pr.catch(voiceFinished);
+        setTimeout(()=>{ if(audio===a&&!voiceDone&&a.paused&&a.currentTime===0) voiceFinished(); },3000); // 保険：開始できなければ待たない
+      }catch(e){ voiceFinished(); }
+    } else { voiceFinished(); }
+  }
+  function onTap(e){
+    if(e){ e.stopPropagation&&e.stopPropagation(); if(e.type==='touchend'&&e.cancelable) e.preventDefault(); }
+    if(Date.now()-lineShownAt<ENTRY_SCENE_SKIP_DELAY_MS) return; // 表示から1秒間はスキップ不可（入口タップの貫通・連打も防ぐ）
+    // ボイス再生中のタップ＝スキップ（ボイス停止→次へ）。再生後のタップ＝次へ
+    idx++;
+    if(idx>=cfg.lines.length){ close(); } else { showLine(idx); }
+  }
+  ov.addEventListener('click',onTap); ov.addEventListener('touchend',onTap,{passive:false});
+  showOv('ov-entry-scene');
+  showLine(0);
+}
+
 // 背景を「画像1枚分」ずつ下へ流し、上下がつながるようにループさせる。
 // 画像の表示高さ（=ループ1周の移動量）を実寸から求め、端数をなくして継ぎ目を防ぐ。
 const MENU_BG_SPEED_PX_PER_SEC=40; // 流れる速さ（大きいほど速い）
