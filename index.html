@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DUNGEON WALKER">
-<title>DUNGEON WALKER DWCver445</title>
+<title>DUNGEON WALKER DWCver449</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 :root{--bg:#07050e;--panel:#110d1a;--panel2:#180f28;--border:#2a1e42;--gold:#c9a84c;--text:#e8dcc8;--dim:#5a4a3a;--common:#8a9aaa;--uncommon:#50b450;--rare:#4a8aff;--epic:#d040ff;--legendary:#ff9500;}
@@ -64,7 +64,9 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 /* ===== 入場シーン（メニュー→エリア選択／ショップ）：背景＋右寄りキャラ＋下側セリフ ===== */
 #ov-entry-scene{z-index:2100 !important;background:#000;padding:0;overflow:hidden;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;}
 #es-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;}
-#es-chara{position:absolute;right:0;top:50%;transform:translateY(-50%);height:78%;max-width:88%;width:auto;object-fit:contain;object-position:right center;pointer-events:none;}
+#es-chara{position:absolute;right:0;top:50%;transform:translateY(-50%);height:78%;max-width:88%;width:auto;object-fit:contain;object-position:right center;pointer-events:none;
+  /* 縁取り：細い明るい輪郭＋薄い暗い影（目立ちすぎない程度。強さはrgbaの透明度で調整） */
+  filter:drop-shadow(1px 0 0 rgba(255,255,255,.75)) drop-shadow(-1px 0 0 rgba(255,255,255,.75)) drop-shadow(0 1px 0 rgba(255,255,255,.75)) drop-shadow(0 -1px 0 rgba(255,255,255,.75)) drop-shadow(0 0 5px rgba(0,0,0,.55));}
 #es-box{position:absolute;left:12px;right:12px;bottom:calc(9% + env(safe-area-inset-bottom,0px));min-height:112px;box-sizing:border-box;padding:14px 16px 22px;
   background:rgba(8,6,16,.86);border:1.5px solid rgba(212,175,90,.75);border-radius:10px;color:#f1ead8;font-family:'Noto Sans JP',sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.6);}
 #es-name{font-size:13px;color:#e0b95a;letter-spacing:2px;margin-bottom:6px;font-weight:bold;}
@@ -849,7 +851,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 
 <div id="tap-to-start-screen" style="display:none;position:fixed;inset:0;background:#07050e;z-index:1100;align-items:center;justify-content:center;flex-direction:column;gap:24px;cursor:pointer;touch-action:manipulation;transition:opacity .3s;opacity:1;">
   <div style="font-family:'Cinzel',serif;font-size:22px;color:#c9a84c;letter-spacing:6px;text-shadow:0 0 24px rgba(201,168,76,.8);animation:logo-pulse 1.5s ease-in-out infinite;">DUNGEON WALKER</div>
-  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v445</div>
+  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v449</div>
   <div style="font-family:'Cinzel',serif;font-size:13px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;">▶ TAP TO START</div>
 </div>
 <div id="opening-screen" style="display:none;position:fixed;inset:0;background:#000;z-index:1004;opacity:1;touch-action:none;overflow:hidden;">
@@ -883,7 +885,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
     <div style="font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#b8d4ff;letter-spacing:8px;text-shadow:0 0 20px rgba(100,160,255,.8),0 0 40px rgba(100,160,255,.3),1px 1px 0 #0a2060;text-align:center;">CHARGE</div>
     <div style="height:2px;width:220px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin-top:6px;"></div>
     <div style="font-family:'Cinzel',serif;font-size:10px;color:rgba(201,168,76,.5);letter-spacing:3px;">CARD BATTLE RPG</div>
-    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver445</div>
+    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver449</div>
     <div style="font-family:'Cinzel',serif;font-size:12px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;margin-top:10px;">▶ TAP TO START</div>
   </div>
 
@@ -1248,7 +1250,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 </div>
 
 <!-- 実績ページ（タイトル画面から使うため#appの外側に配置） -->
-<div class="overlay" id="ov-achievements" style="gap:8px;padding:14px 12px;position:fixed;z-index:2000;overflow:hidden;background-image:url(munyu_haikei.png);background-size:cover;background-position:center;">
+<div class="overlay" id="ov-achievements" style="gap:8px;padding:14px 12px;position:fixed;z-index:2000;overflow:hidden;background-image:url(menubg_achv.png);background-size:cover;background-position:center;">
   <div class="nav-back-row">
     <div class="nav-back-btn" id="btn-achievements-back">← 戻る</div>
     <div class="nav-back-title">🏆 実績</div>
@@ -10992,8 +10994,11 @@ function _dwInjectFeedbackStyles(){
   if(_dwFeedbackStyleInjected) return; _dwFeedbackStyleInjected=true;
   const st=document.createElement('style');
   st.textContent =
-    '@keyframes dw-tap-press{0%{transform:scale(1);}45%{transform:scale(0.90);}100%{transform:scale(1);}}'+
-    '@keyframes dw-tap-reject{0%{transform:translateX(0);}15%{transform:translateX(-8px);}30%{transform:translateX(7px);}45%{transform:translateX(-6px);}60%{transform:translateX(5px);}75%{transform:translateX(-3px);}90%{transform:translateX(2px);}100%{transform:translateX(0);}}'+
+    // ※ transform ではなく個別の scale / translate プロパティを使う。
+    //    transform: translateX(-50%) で中央寄せしている要素（スキップ、説明書、ルール枠など）が
+    //    アニメーション中だけ中央寄せを失って右にずれるのを防ぐ（scale/translateは transform と合成される）。
+    '@keyframes dw-tap-press{0%{scale:1;}45%{scale:0.90;}100%{scale:1;}}'+
+    '@keyframes dw-tap-reject{0%{translate:0 0;}15%{translate:-8px 0;}30%{translate:7px 0;}45%{translate:-6px 0;}60%{translate:5px 0;}75%{translate:-3px 0;}90%{translate:2px 0;}100%{translate:0 0;}}'+
     '.dw-tap-press-fx{animation:dw-tap-press .18s ease-out;}'+
     '.dw-tap-reject-fx{animation:dw-tap-reject .32s ease-in-out;}';
   document.head.appendChild(st);
@@ -11001,6 +11006,8 @@ function _dwInjectFeedbackStyles(){
 // 押下フィードバック：対象要素を一瞬だけ縮ませる（連打してもアニメーションが不自然に蓄積しないよう、都度リセットしてから再生する）
 function dwPressFeedback(el){
   if(!el) return;
+  // transformで位置決め（中央寄せなど）している要素は、縮小が位置のずれになるため押下演出を付けない
+  try{ const _tf=getComputedStyle(el).transform; if(_tf&&_tf!=='none') return; }catch(e){}
   _dwInjectFeedbackStyles();
   el.classList.remove('dw-tap-press-fx');
   void el.offsetWidth; // 強制リフローで同じアニメーションを再度発火できるようにする
@@ -13683,13 +13690,13 @@ function _bindTitleExtraButtons(){
   bind('menu-btn-area',()=>{ playEntryScene('area',()=>{ showAreaSelect(); }); });
   bind('menu-btn-soul',()=>{
     if(!isStartCaveCleared()){ dwRejectFeedback(document.getElementById('menu-btn-soul')); _deckEditShowMsg('🔒 「始まりの洞窟」をクリアすると解放されます'); return; }
-    sfxSelect(); showSoulSetupScreen();
+    sfxSelect(); playEntryScene('soul',()=>{ showSoulSetupScreen(); });
   });
   bind('menu-btn-deck',()=>{
     if(!isDeckGachaUnlocked()){ dwRejectFeedback(document.getElementById('menu-btn-deck')); _deckEditShowMsg('🔒 ダンジョンを5つクリアすると解放されます（チュートリアルを除く／現在'+nonTutorialClearedCount()+'/5）'); return; }
-    sfxSelect(); showDeckEditScreen();
+    sfxSelect(); playEntryScene('deck',()=>{ showDeckEditScreen(); });
   });
-  bind('btn-deck-edit-close',()=>{ sfxBack(); hideOv('ov-deck-edit'); });
+  bind('btn-deck-edit-close',()=>{ sfxBack(); playEntryScene('deckExit',()=>{ hideOv('ov-deck-edit'); }); });
   bind('menu-btn-gamedata',()=>{ sfxSelect(); showGameDataScreen(); });
   bind('menu-btn-shop',()=>{
     if(!isStartCaveCleared()){ dwRejectFeedback(document.getElementById('menu-btn-shop')); _deckEditShowMsg('🔒 「始まりの洞窟」をクリアすると解放されます'); return; }
@@ -13708,9 +13715,9 @@ function _bindTitleExtraButtons(){
   bind('sc-cancel',()=>{ sfxCancel(); _shopConfirmItem=null; hideOv('ov-shop-confirm'); });
   bind('menu-btn-gacha',()=>{
     if(!isDeckGachaUnlocked()){ dwRejectFeedback(document.getElementById('menu-btn-gacha')); _deckEditShowMsg('🔒 ダンジョンを5つクリアすると解放されます（チュートリアルを除く／現在'+nonTutorialClearedCount()+'/5）'); return; }
-    sfxSelect(); showGachaSelectScreen();
+    sfxSelect(); playEntryScene('gacha',()=>{ showGachaSelectScreen(); });
   });
-  bind('btn-gacha-select-back',()=>{ sfxBack(); hideOv('ov-gacha-select'); });
+  bind('btn-gacha-select-back',()=>{ sfxBack(); playEntryScene('gachaExit',()=>{ hideOv('ov-gacha-select'); }); });
   bind('gacha-back-to-select',()=>{ sfxBack(); hideOv('ov-gacha-common'); showGachaSelectScreen(); });
   bind('gacha-buy-gold',()=>{ _showGachaBuyConfirm('gold'); });
   bind('gacha-buy-crystal',()=>{ _showGachaBuyConfirm('crystal'); });
@@ -13722,7 +13729,7 @@ function _bindTitleExtraButtons(){
   bind('gc-cancel',()=>{ sfxCancel(); _gachaConfirmCurrency=null; hideOv('ov-gacha-confirm'); });
   bind('btn-gacha-result-close',()=>{ sfxSelect(); showGachaCommonScreen(); });
   bind('menu-btn-rules',()=>{ sfxSelect(); showOv('ov-rules'); });
-  bind('menu-btn-achievements',()=>{ sfxSelect(); showAchievementsScreen(); });
+  bind('menu-btn-achievements',()=>{ sfxSelect(); playEntryScene('achv',()=>{ showAchievementsScreen(); }); });
   bind('menu-btn-savedelete',()=>{ sfxSelect(); showOv('ov-save-delete-confirm'); _startSaveDeleteCountdown(); });
   bind('menu-btn-theme',()=>{
     sfxSelect();
@@ -13825,6 +13832,16 @@ const ENTRY_SCENES={
     charaHeight:78,
     lines:[ {name:'', text:'まいど！またきてね。', voice:'voice_shop2.mp3'} ]
   },
+  // ── ソウル／デッキ構築／ガチャ／実績：入る時・出る時 ──
+  // ★キャラ画像・ボイス・セリフはすべて仮の設定。実際の素材名とセリフに書き換えること。
+  soul:      { bg:'menubg_soul.png',  chara:'chara_soul.png',  charaHeight:78, lines:[ {name:'', text:'聞こえますか？彼らの声が！',     voice:'voice_soul.mp3'} ] },
+  soulExit:  { bg:'menubg_soul.png',  chara:'chara_soul.png',  charaHeight:78, lines:[ {name:'', text:'また、いつでも…。',         voice:'voice_soul2.mp3'} ] },
+  deck:      { bg:'menubg_card.png',  chara:'chara_deck.png',  charaHeight:78, lines:[ {name:'', text:'よし、デッキを見せてくれ！',       voice:'voice_deck.mp3'} ] },
+  deckExit:  { bg:'menubg_card.png',  chara:'chara_deck.png',  charaHeight:78, lines:[ {name:'', text:'いいデッキだ！行ってこい！',   voice:'voice_deck2.mp3'} ] },
+  gacha:     { bg:'menubg_gatya.png', chara:'chara_gacha.png', charaHeight:78, lines:[ {name:'', text:'さぁ！何が出るかはお楽しみ！',         voice:'voice_gacha.mp3'} ] },
+  gachaExit: { bg:'menubg_gatya.png', chara:'chara_gacha.png', charaHeight:78, lines:[ {name:'', text:'また、お会いしましょう！', voice:'voice_gacha2.mp3'} ] },
+  achv:      { bg:'menubg_achv.png', chara:'chara_achv.png',  charaHeight:78, lines:[ {name:'', text:'何が知りたいんだい？', voice:'voice_achv.mp3'} ] },
+  achvExit:  { bg:'menubg_achv.png', chara:'chara_achv.png',  charaHeight:78, lines:[ {name:'', text:'なるほど、覚えておこう。', voice:'voice_achv2.mp3'} ] },
   // エリア画面でチャージを選んだ後、ステージへ移動する前
   areaGo:{
     bg:'menubg_eria.png',
@@ -14609,7 +14626,7 @@ let _soulSetupChargeId=null;
 let _soulSetupLastChargeId=null; // 直前に編集していたチャージ（タブ・一覧で目立たせる用）
 function showSoulSetupScreen(){
   renderSoulSetupChargeTabs();
-  bind('btn-soul-setup-close',()=>{ sfxBack(); hideOv('ov-soul-setup'); });
+  bind('btn-soul-setup-close',()=>{ sfxBack(); playEntryScene('soulExit',()=>{ hideOv('ov-soul-setup'); }); });
   const firstId=Object.values(CHARGE_TYPES)[0].id;
   openSoulSetupFor(_soulSetupLastChargeId||firstId);
   showOv('ov-soul-setup');
@@ -14715,8 +14732,8 @@ function showAchievementsScreen(){
   renderAchievementsContent();
   const closeBtn=document.getElementById('btn-achievements-back');
   if(closeBtn){
-    closeBtn.onclick=(e)=>{e.stopPropagation();sfxBack();hideOv('ov-achievements');};
-    closeBtn.ontouchend=(e)=>{e.stopPropagation();e.preventDefault();sfxBack();hideOv('ov-achievements');};
+    closeBtn.onclick=(e)=>{e.stopPropagation();sfxBack();playEntryScene('achvExit',()=>{ hideOv('ov-achievements'); });};
+    closeBtn.ontouchend=(e)=>{e.stopPropagation();e.preventDefault();sfxBack();playEntryScene('achvExit',()=>{ hideOv('ov-achievements'); });};
   }
   showOv('ov-achievements');
 }
