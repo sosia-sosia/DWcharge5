@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DUNGEON WALKER">
-<title>DUNGEON WALKER DWCver449</title>
+<title>DUNGEON WALKER DWCver450</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 :root{--bg:#07050e;--panel:#110d1a;--panel2:#180f28;--border:#2a1e42;--gold:#c9a84c;--text:#e8dcc8;--dim:#5a4a3a;--common:#8a9aaa;--uncommon:#50b450;--rare:#4a8aff;--epic:#d040ff;--legendary:#ff9500;}
@@ -851,7 +851,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 
 <div id="tap-to-start-screen" style="display:none;position:fixed;inset:0;background:#07050e;z-index:1100;align-items:center;justify-content:center;flex-direction:column;gap:24px;cursor:pointer;touch-action:manipulation;transition:opacity .3s;opacity:1;">
   <div style="font-family:'Cinzel',serif;font-size:22px;color:#c9a84c;letter-spacing:6px;text-shadow:0 0 24px rgba(201,168,76,.8);animation:logo-pulse 1.5s ease-in-out infinite;">DUNGEON WALKER</div>
-  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v449</div>
+  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v450</div>
   <div style="font-family:'Cinzel',serif;font-size:13px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;">▶ TAP TO START</div>
 </div>
 <div id="opening-screen" style="display:none;position:fixed;inset:0;background:#000;z-index:1004;opacity:1;touch-action:none;overflow:hidden;">
@@ -885,7 +885,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
     <div style="font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#b8d4ff;letter-spacing:8px;text-shadow:0 0 20px rgba(100,160,255,.8),0 0 40px rgba(100,160,255,.3),1px 1px 0 #0a2060;text-align:center;">CHARGE</div>
     <div style="height:2px;width:220px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin-top:6px;"></div>
     <div style="font-family:'Cinzel',serif;font-size:10px;color:rgba(201,168,76,.5);letter-spacing:3px;">CARD BATTLE RPG</div>
-    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver449</div>
+    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver450</div>
     <div style="font-family:'Cinzel',serif;font-size:12px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;margin-top:10px;">▶ TAP TO START</div>
   </div>
 
@@ -2758,12 +2758,27 @@ function filterBougaiDependent(ids){
   if(areaHasBougaiSource(G.areaId)) return ids;
   return ids.filter(id=>!BOUGAI_DEPENDENT_CARD_IDS.includes(id));
 }
-// レジェンドカード抽選：まだ一枚もレジェンドを持っていない場合、チャージ専用レジェンドを2倍の重みで抽選する（1枚持ったら通常確率に戻る）
-function _weightedPickLegendary(pool){
-  const gotLegendary=G.deck.some(id=>DB[id]&&DB[id].rarity==='legendary');
-  if(gotLegendary) return pool[Math.floor(Math.random()*pool.length)];
-  const weights=pool.map(id=>(DB[id]&&DB[id].onlyCharge)?2:1);
-  const total=weights.reduce((a,b)=>a+b,0);
+// 報酬カード抽選の重み付け（偏り対策）
+//  ・直近の報酬画面（REWARD_RECENT_SETS回分）に出たカードは、出る重みをREWARD_RECENT_WEIGHT倍に下げる。
+//    → 同じカードが続けて並びにくくなる（候補が少ないレアリティで特に起きていた「いつも同じカード」を緩和）。
+//  ・まだレジェンドを1枚も持っていない場合、チャージ専用レジェンドは従来どおり2倍の重みで抽選する。
+const REWARD_RECENT_SETS=2;        // 何回分の報酬画面を「直近」とみなすか
+const REWARD_RECENT_WEIGHT=0.25;   // 直近に出たカードの重み倍率（1で無効＝従来どおり）
+function _recentRewardIds(){
+  const h=G._rewardHistory||[]; const set=new Set();
+  for(let i=0;i<Math.min(REWARD_RECENT_SETS,h.length);i++) (h[i]||[]).forEach(id=>set.add(id));
+  return set;
+}
+function _weightedPickReward(pool,rarity){
+  const recent=_recentRewardIds();
+  const boostCharge=(rarity==='legendary') && !G.deck.some(id=>DB[id]&&DB[id].rarity==='legendary');
+  const weights=pool.map(id=>{
+    let w=1;
+    if(boostCharge && DB[id] && DB[id].onlyCharge) w*=2;
+    if(recent.has(id)) w*=REWARD_RECENT_WEIGHT;
+    return w;
+  });
+  const total=weights.reduce((x,y)=>x+y,0);
   let r=Math.random()*total;
   for(let i=0;i<pool.length;i++){ r-=weights[i]; if(r<=0) return pool[i]; }
   return pool[pool.length-1];
@@ -2784,12 +2799,13 @@ function pickCard(stage, exclude=[]){
   if(!pool.length) pool=filterChargeRestricted((CARD_POOL[rarity]||CARD_POOL.rare).filter(id=>!exclude.includes(id)));
   if(!pool.length) pool=filterChargeRestricted(CARD_POOL.rare);
   if(!pool.length) pool=CARD_POOL.rare;
-  if(rarity==='legendary') return _weightedPickLegendary(pool);
-  return pool[Math.floor(Math.random()*pool.length)];
+  return _weightedPickReward(pool,rarity);
 }
 function getRewards(stage){
   const picked=[];
   for(let i=0;i<4;i++) picked.push(pickCard(stage, picked));
+  // 提示したカードを履歴に残す（新しい順）。次回以降の抽選で出にくくするために使う
+  G._rewardHistory=[picked.slice(),...(G._rewardHistory||[])].slice(0,Math.max(1,REWARD_RECENT_SETS));
   return picked;
 }
 
@@ -7561,7 +7577,7 @@ function showChargeSelect(){
         G.chargeType=ct.id;
         G.chargeLevel=getChargeLevel(ct.id);
         G.chargeCount=0;
-        G.deck=getEffectiveDeck(ct.id);
+        G.deck=getEffectiveDeck(ct.id); G._rewardHistory=[];
         // ソウルボーナスの再計算：initGame()はチャージ選択より前（タイトル→メインメニュー遷移時）に呼ばれるため、
         // その時点ではG.chargeTypeがまだ未選択（null）または前回の値のままで、装着中ソウルの判定が正しく行えない。
         // チャージが確定したこの時点で、正しいチャージの装着ソウルを基に再計算する。
