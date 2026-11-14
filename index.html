@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DUNGEON WALKER">
-<title>DUNGEON WALKER DWCver454</title>
+<title>DUNGEON WALKER DWCver455</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 :root{--bg:#07050e;--panel:#110d1a;--panel2:#180f28;--border:#2a1e42;--gold:#c9a84c;--text:#e8dcc8;--dim:#5a4a3a;--common:#8a9aaa;--uncommon:#50b450;--rare:#4a8aff;--epic:#d040ff;--legendary:#ff9500;}
@@ -36,6 +36,12 @@ html[data-dw-scale="90"] #menu-bg-view,html[data-dw-scale="80"] #menu-bg-view{he
 @supports (height:100svh){
   html[data-dw-scale="90"] #opening-skip,html[data-dw-scale="80"] #opening-skip{top:calc((100svh - 62px - env(safe-area-inset-bottom,0px))*var(--dw-k)) !important;}
 }
+/* メニュー画面の「画面サイズ」欄（エリアボタンの上）。枠で囲み、選択中は明るく強調 */
+#menu-scale-box{position:relative;z-index:1;height:58px;flex-shrink:0;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 10px;
+  background:rgba(8,6,16,.8);border:2px solid rgba(212,175,90,.85);border-radius:10px;box-shadow:0 0 12px rgba(0,0,0,.6),inset 0 0 10px rgba(212,175,90,.12);font-family:sans-serif;}
+#menu-scale-box .dw-scale-label{font-size:12px;color:#f0d47a;font-weight:bold;letter-spacing:1px;white-space:nowrap;}
+#menu-scale-box .dw-scale-btn{flex:1 1 0;min-width:0;text-align:center;padding:9px 0;border:2px solid rgba(201,168,76,.55);border-radius:14px;font-size:13px;color:#c9a84c;background:rgba(0,0,0,.45);cursor:pointer;touch-action:manipulation;}
+#menu-scale-box .dw-scale-btn.sel{background:rgba(201,168,76,.42);border-color:#f0d47a;color:#fff;font-weight:bold;box-shadow:0 0 10px rgba(240,212,122,.55);}
 #screen-scale-box{position:absolute;top:44px;left:10px;z-index:10;display:flex;align-items:center;gap:4px;font-family:sans-serif;}
 #screen-scale-box .dw-scale-label{font-size:9px;color:rgba(201,168,76,.65);margin-right:1px;letter-spacing:1px;}
 #screen-scale-box .dw-scale-btn{min-width:38px;text-align:center;background:rgba(0,0,0,.5);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:4px 6px;font-size:10px;color:#c9a84c;cursor:pointer;touch-action:manipulation;}
@@ -876,7 +882,7 @@ html[data-dw-scale="90"] #menu-bg-view,html[data-dw-scale="80"] #menu-bg-view{he
 
 <div id="tap-to-start-screen" style="display:none;position:fixed;inset:0;background:#07050e;z-index:1100;align-items:center;justify-content:center;flex-direction:column;gap:24px;cursor:pointer;touch-action:manipulation;transition:opacity .3s;opacity:1;">
   <div style="font-family:'Cinzel',serif;font-size:22px;color:#c9a84c;letter-spacing:6px;text-shadow:0 0 24px rgba(201,168,76,.8);animation:logo-pulse 1.5s ease-in-out infinite;">DUNGEON WALKER</div>
-  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v454</div>
+  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v455</div>
   <div style="font-family:'Cinzel',serif;font-size:13px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;">▶ TAP TO START</div>
 </div>
 <div id="opening-screen" style="display:none;position:fixed;inset:0;background:#000;z-index:1004;opacity:1;touch-action:none;overflow:hidden;">
@@ -916,7 +922,7 @@ html[data-dw-scale="90"] #menu-bg-view,html[data-dw-scale="80"] #menu-bg-view{he
     <div style="font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#b8d4ff;letter-spacing:8px;text-shadow:0 0 20px rgba(100,160,255,.8),0 0 40px rgba(100,160,255,.3),1px 1px 0 #0a2060;text-align:center;">CHARGE</div>
     <div style="height:2px;width:220px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin-top:6px;"></div>
     <div style="font-family:'Cinzel',serif;font-size:10px;color:rgba(201,168,76,.5);letter-spacing:3px;">CARD BATTLE RPG</div>
-    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver454</div>
+    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver455</div>
     <div style="font-family:'Cinzel',serif;font-size:12px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;margin-top:10px;">▶ TAP TO START</div>
   </div>
 
@@ -1060,7 +1066,13 @@ html[data-dw-scale="90"] #menu-bg-view,html[data-dw-scale="80"] #menu-bg-view{he
 <div class="overlay" id="ov-main-menu" style="gap:0;padding:16px 14px;position:fixed;z-index:1900;align-items:stretch;background-image:url(munyu_haikei.png);background-size:cover;background-position:center;">
   <div id="menu-bg-wrap"><div id="menu-bg-view"><div id="menu-bg-scroll"></div></div></div>
   <div id="btn-menu-back" class="ov-btn" style="position:absolute;top:14px;right:14px;width:auto;font-size:13px;padding:8px 16px;z-index:2;">戻る</div>
-  <div style="height:142px;flex-shrink:0;"></div>
+  <div style="height:74px;flex-shrink:0;"></div>
+  <div id="menu-scale-box">
+    <span class="dw-scale-label">画面サイズ</span>
+    <div class="dw-scale-btn" data-scale="100">100%</div>
+    <div class="dw-scale-btn" data-scale="90">90%</div>
+    <div class="dw-scale-btn" data-scale="80">80%</div>
+  </div>
   <div id="menu-btn-area" class="ov-btn" style="width:100%;height:90px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;background-image:url(menu_eria.png);background-size:cover;background-position:center;text-indent:-9999px;overflow:hidden;"></div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;">
     <div id="menu-btn-soul" class="ov-btn menu-img-btn" data-bg="menu_soul.png" style="height:70px;overflow:hidden;">
@@ -14001,7 +14013,7 @@ function dwApplyScreenScale(pct,persist){
   const root=document.documentElement;
   if(pct===100) root.removeAttribute('data-dw-scale'); else root.setAttribute('data-dw-scale',String(pct));
   if(persist){ try{ localStorage.setItem('dw_screen_scale',String(pct)); }catch(e){} }
-  document.querySelectorAll('#screen-scale-box .dw-scale-btn').forEach(b=>{
+  document.querySelectorAll('.dw-scale-btn').forEach(b=>{
     b.classList.toggle('sel',parseInt(b.dataset.scale,10)===pct);
   });
   // レイアウトを再計算させる（resizeを聞いている既存処理に変更を知らせる）
@@ -14009,8 +14021,7 @@ function dwApplyScreenScale(pct,persist){
 }
 (function dwInitScreenScaleUI(){
   const init=()=>{
-    const box=document.getElementById('screen-scale-box'); if(!box) return;
-    box.querySelectorAll('.dw-scale-btn').forEach(btn=>{
+    document.querySelectorAll('.dw-scale-btn').forEach(btn=>{
       const pick=(e)=>{ e.stopPropagation(); if(e.cancelable) e.preventDefault(); dwApplyScreenScale(parseInt(btn.dataset.scale,10),true); };
       btn.addEventListener('touchend',pick,{passive:false});
       btn.addEventListener('click',pick);
