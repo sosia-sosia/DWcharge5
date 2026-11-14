@@ -5,32 +5,16 @@
   <link rel="apple-touch-icon" sizes="180x180" href="DWicon.png">
   <link rel="icon" type="image/png" sizes="180x180" href="DWicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<script>(function(){try{var v=localStorage.getItem('dw_screen_scale');if(v==='90'||v==='80'){document.documentElement.setAttribute('data-dw-scale',v);}}catch(e){}})();</script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DUNGEON WALKER">
-<title>DUNGEON WALKER DWCver452</title>
+<title>DUNGEON WALKER DWCver450</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 :root{--bg:#07050e;--panel:#110d1a;--panel2:#180f28;--border:#2a1e42;--gold:#c9a84c;--text:#e8dcc8;--dim:#5a4a3a;--common:#8a9aaa;--uncommon:#50b450;--rare:#4a8aff;--epic:#d040ff;--legendary:#ff9500;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-moz-user-select:none;-webkit-touch-callout:none;}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'Cinzel',serif;}
 #app{max-width:420px;height:100%;height:100dvh;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;position:relative;}
-
-/* ===== 画面サイズ切り替え（100/90/80%）=====
-   100%は何も適用しない（従来どおり）。90/80%は<html>全体を画面中央基準で一様に縮小する。
-   ・<html>は常に画面と同じ大きさなので、body直下のposition:fixedなオーバーレイ（PCの「left:50%+420px幅」の
-     中央寄せルールを含む）の基準が変わらず、既存のレイアウトをそのまま保ったまま全体が同じ倍率になる。
-     （bodyを縮小すると、PCではbodyが420px幅のカラムのため、fixed要素の基準がずれてタッチ判定も外れる）
-   ・transformはヒットテストにも反映されるので、タッチ判定は表示位置と一致する。
-   ※ JS側で getBoundingClientRect() の座標を fixed 要素の配置に使う箇所は dwLocalRect() で換算している。 */
-html[data-dw-scale="90"],html[data-dw-scale="80"]{height:100vh;height:100dvh;transform-origin:50% 50%;}
-html[data-dw-scale="90"]{transform:scale(.9);}
-html[data-dw-scale="80"]{transform:scale(.8);}
-#screen-scale-box{position:absolute;top:44px;left:10px;z-index:10;display:flex;align-items:center;gap:4px;font-family:sans-serif;}
-#screen-scale-box .dw-scale-label{font-size:9px;color:rgba(201,168,76,.65);margin-right:1px;letter-spacing:1px;}
-#screen-scale-box .dw-scale-btn{min-width:38px;text-align:center;background:rgba(0,0,0,.5);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:4px 6px;font-size:10px;color:#c9a84c;cursor:pointer;touch-action:manipulation;}
-#screen-scale-box .dw-scale-btn.sel{background:rgba(201,168,76,.38);border-color:#f0d47a;color:#fff;font-weight:bold;box-shadow:0 0 8px rgba(240,212,122,.4);}
 
 /* PC対応：幅420px固定・中央表示 */
 @media (min-width:480px){
@@ -867,7 +851,7 @@ html[data-dw-scale="80"]{transform:scale(.8);}
 
 <div id="tap-to-start-screen" style="display:none;position:fixed;inset:0;background:#07050e;z-index:1100;align-items:center;justify-content:center;flex-direction:column;gap:24px;cursor:pointer;touch-action:manipulation;transition:opacity .3s;opacity:1;">
   <div style="font-family:'Cinzel',serif;font-size:22px;color:#c9a84c;letter-spacing:6px;text-shadow:0 0 24px rgba(201,168,76,.8);animation:logo-pulse 1.5s ease-in-out infinite;">DUNGEON WALKER</div>
-  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v452</div>
+  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v450</div>
   <div style="font-family:'Cinzel',serif;font-size:13px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;">▶ TAP TO START</div>
 </div>
 <div id="opening-screen" style="display:none;position:fixed;inset:0;background:#000;z-index:1004;opacity:1;touch-action:none;overflow:hidden;">
@@ -893,12 +877,6 @@ html[data-dw-scale="80"]{transform:scale(.8);}
     <input id="admin-pw-input" type="password" maxlength="4" placeholder="🔑" style="width:52px;height:28px;background:rgba(0,0,0,.5);border:1px solid rgba(201,168,76,.3);border-radius:6px;color:#c9a84c;font-size:13px;text-align:center;padding:0 4px;font-family:monospace;outline:none;-webkit-appearance:none;">
     <div id="admin-pw-enter" style="background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);border-radius:6px;padding:4px 8px;font-size:10px;color:#c9a84c;cursor:pointer;touch-action:manipulation;font-family:'Cinzel',serif;">GO</div>
   </div>
-  <div id="screen-scale-box">
-    <span class="dw-scale-label">画面</span>
-    <div class="dw-scale-btn" data-scale="100">100%</div>
-    <div class="dw-scale-btn" data-scale="90">90%</div>
-    <div class="dw-scale-btn" data-scale="80">80%</div>
-  </div>
   
   <div style="display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;">
     <div style="font-family:'Cinzel',serif;font-size:11px;color:#c9a84c;letter-spacing:6px;opacity:.7;">- PRESENTS -</div>
@@ -907,7 +885,7 @@ html[data-dw-scale="80"]{transform:scale(.8);}
     <div style="font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#b8d4ff;letter-spacing:8px;text-shadow:0 0 20px rgba(100,160,255,.8),0 0 40px rgba(100,160,255,.3),1px 1px 0 #0a2060;text-align:center;">CHARGE</div>
     <div style="height:2px;width:220px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin-top:6px;"></div>
     <div style="font-family:'Cinzel',serif;font-size:10px;color:rgba(201,168,76,.5);letter-spacing:3px;">CARD BATTLE RPG</div>
-    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver452</div>
+    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver450</div>
     <div style="font-family:'Cinzel',serif;font-size:12px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;margin-top:10px;">▶ TAP TO START</div>
   </div>
 
@@ -1025,7 +1003,7 @@ html[data-dw-scale="80"]{transform:scale(.8);}
   <div style="background:linear-gradient(160deg,#1a1508,#0a0a0a);border:2px solid rgba(201,168,76,.8);border-radius:14px;padding:20px 24px;max-width:300px;width:88%;font-family:sans-serif;display:flex;flex-direction:column;gap:12px;align-items:center;">
     <div style="font-size:32px;">📍</div>
     <div style="font-family:'Cinzel',serif;font-size:15px;color:#f0d47a;font-weight:bold;text-align:center;">エリア攻略の途中データがあります</div>
-    <div style="font-size:12px;color:#ccc;text-align:center;line-height:1.6;">前回、攻略の途中でゲームが閉じられました。<br>続きから再開しますか？<br>「あきらめる」を選ぶと、データは残したまま起動画面に戻ります。</div>
+    <div style="font-size:12px;color:#ccc;text-align:center;line-height:1.6;">前回、攻略の途中でゲームが閉じられました。<br>続きから再開しますか？<br>あきらめた場合、このデータは消去されます。</div>
     <div style="display:flex;gap:12px;width:100%;margin-top:4px;">
       <button id="rrc-resume" style="flex:1;background:#1a2a10;border:2px solid #7ed6a0;border-radius:6px;padding:10px;color:#7ed6a0;font-size:13px;font-weight:bold;cursor:pointer;touch-action:manipulation;font-family:'Cinzel',serif;">続きから再開</button>
       <button id="rrc-abandon" style="flex:1;background:#1a1a1a;border:2px solid #666;border-radius:6px;padding:10px;color:#ccc;font-size:13px;cursor:pointer;touch-action:manipulation;font-family:'Cinzel',serif;">あきらめる</button>
@@ -2920,37 +2898,6 @@ function showResumeRunPrompt(){
   bind('rrc-resume', _doResumeRun);
   bind('rrc-abandon', _doAbandonRun);
 }
-// 起動演出の共通タイムライン：Sosiaロゴ2秒（無音）→ JSON OP → タイトル。
-// 既存の「起動時」「タイトルへ戻る時」と同じ処理を共通化したもの（重複実装を避けるため）。
-function _runLogoThenOpeningTimeline(){
-  setTimeout(()=>{
-    companyScreen.style.opacity='0';
-    setTimeout(()=>{
-      companyScreen.style.display='none';
-      // JSONによるOP演出 → 終了／スキップ／失敗のいずれでもタイトルへ
-      playOpening(()=>{
-        logoScreen.style.display='flex';
-        requestAnimationFrame(()=>requestAnimationFrame(()=>{
-          logoScreen.style.opacity='1';
-          _logoScreenTapReady=true;
-          _registerStartListeners();
-        }));
-      });
-    },600);
-  },2000);
-}
-// 通常の新規起動と同じ「ロゴ表示から」の流れを開始する（再開確認のキャンセル／あきらめる後に使用）
-function _beginStartupLogoSequence(){
-  _gameStarting=false;
-  _logoScreenTapReady=false;
-  logoScreen.style.opacity='0';
-  logoScreen.style.display='none';
-  stopBgm(); // ロゴ・OP前は無音
-  companyScreen.style.display='flex';
-  companyScreen.style.opacity='0';
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{ companyScreen.style.opacity='1'; }));
-  _runLogoThenOpeningTimeline();
-}
 function _goToNormalTitleSkippingSplash(){
   // 「あきらめる」後は改めて起動演出を見せる必要はないため、タイトル画面へ直接進める
   companyScreen.style.display='none';
@@ -2960,14 +2907,11 @@ function _goToNormalTitleSkippingSplash(){
   _gameStarting=false; // 念のため（このパスはstartGame()を経由しないため通常は既にfalseのはずだが保険）
   _registerStartListeners(); // タイトルのタップ判定を必ず再設定する（これを忘れるとタイトルが反応しなくなる：既知の不具合パターン）
 }
-// 「あきらめる」：再開せずに起動画面へ戻る。
-//  ・保存データ（攻略中データ）は削除も書き換えもしない（新規にエリア攻略を始める等、既存仕様の処理が行われるまで保持）。
-//  ・使い捨てカードの消滅処理も行わない（攻略自体は終了扱いにしないため）。
-//  ・以前はタイトルへ直接進んでいたが、通常起動と同じロゴ表示→OP→タイトルの流れから始める。
-//  ・再開確認は起動直後の1回のみ表示される（このセッションでは再表示されない）。
 function _doAbandonRun(){
   hideOv('ov-resume-run');
-  _beginStartupLogoSequence();
+  clearRunState();
+  _consumeDisposableCardsOnAreaExit(); // 破棄されなかった使い捨てカードをここで消滅処理
+  _goToNormalTitleSkippingSplash();
 }
 // 鍛冶屋で強化されたカード（IDが「元ID_kai」）は、強化した瞬間にDB[newId]を
 // メモリ上に動的追加しているだけなので、ページ再読み込み後に「攻略中データ」を
@@ -8684,7 +8628,7 @@ function spawnLegendaryEffect(){
   // 画面中央から放射状に金の星パーティクル
   const colors=['#f1c40f','#f39c12','#c9a84c','#fff','#ffe066'];
   const app=document.getElementById('app');
-  const rect=app?dwLocalRect(app):{left:0,top:0,width:window.innerWidth,height:window.innerHeight};
+  const rect=app?app.getBoundingClientRect():{left:0,top:0,width:window.innerWidth,height:window.innerHeight};
   const cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
   for(let i=0;i<32;i++){
     const p=document.createElement('div');
@@ -8718,7 +8662,7 @@ function spawnLegendaryEffect(){
 // 敵死亡エフェクト（パーティクル爆発）
 function spawnDeathEffect(targetEl){
   if(!targetEl) return;
-  const rect=dwLocalRect(targetEl);
+  const rect=targetEl.getBoundingClientRect();
   const cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
   const colors=['#f39c12','#e74c3c','#f1c40f','#e67e22','#fff','#c9a84c'];
   const layer=document.getElementById('effect-layer');
@@ -8936,7 +8880,7 @@ function showCurseInfo(){
 function playCardFlyAnimation(sourceEl, cardType){
   try{
     if(!sourceEl) return;
-    const startRect=dwLocalRect(sourceEl);
+    const startRect=sourceEl.getBoundingClientRect();
     const isOffensive=(cardType==='attack'||cardType==='curse'||cardType==='bougai');
     const clone=sourceEl.cloneNode(true);
     clone.className=sourceEl.className+' card-fly-clone';
@@ -9505,7 +9449,7 @@ function renderHand(){
       if(ev.changedTouches&&ev.changedTouches.length>0){cx=ev.changedTouches[0].clientX;cy=ev.changedTouches[0].clientY;}
       else if(ev.touches&&ev.touches.length>0){cx=ev.touches[0].clientX;cy=ev.touches[0].clientY;}
       else{cx=ev.clientX||rect.left+rect.width/2;cy=ev.clientY||rect.top+rect.height/2;}
-      const _dws=dwScreenScale(); const rx=(cx-rect.left)/_dws,ry=(cy-rect.top)/_dws;
+      const rx=cx-rect.left,ry=cy-rect.top;
       const ripple=document.createElement('div');
       ripple.className='card-ripple';
       ripple.style.left=rx+'px';ripple.style.top=ry+'px';
@@ -10506,7 +10450,7 @@ function triggerCardEffect(cid){
 function showCardEffect(type,target){
   var areaEl=target==='player'?document.getElementById('player-status-box'):document.getElementById('enemy-area');
   if(!areaEl) return;
-  var rect=dwLocalRect(areaEl);
+  var rect=areaEl.getBoundingClientRect();
   var cv=document.createElement('canvas');
   cv.width=Math.round(rect.width)||320; cv.height=Math.round(rect.height)||160;
   cv.style.cssText='position:fixed;left:'+Math.round(rect.left)+'px;top:'+Math.round(rect.top)+'px;width:'+cv.width+'px;height:'+cv.height+'px;pointer-events:none;z-index:8000;';
@@ -10660,7 +10604,7 @@ function showEffectPopup(imgFile, labelText, colorHex, mode){
   if(isEnemyMode){
     const ea=document.getElementById('enemy-area');
     if(ea){
-      const r=dwLocalRect(ea);
+      const r=ea.getBoundingClientRect();
       wrapper.style.left=(r.left+r.width/2)+'px';
       wrapper.style.top=(r.top+r.height/2)+'px';
     }
@@ -10701,12 +10645,12 @@ function flashShieldAdd(target, amount){
   d.style.cssText='display:none;';
   if(target==='enemy'){
     const ea=document.getElementById('enemy-area');
-    const rect=ea?dwLocalRect(ea):{left:window.innerWidth/2,top:window.innerHeight*0.3,width:0,height:0};
+    const rect=ea?ea.getBoundingClientRect():{left:window.innerWidth/2,top:window.innerHeight*0.3,width:0,height:0};
     d.style.left=(rect.left+20)+'px';
     d.style.top=(rect.top+rect.height/2-26)+'px';
   } else {
     const pb=document.getElementById('player-hp-bar');
-    const rect=pb?dwLocalRect(pb):{left:window.innerWidth/2,top:window.innerHeight*0.7,width:0,height:0};
+    const rect=pb?pb.getBoundingClientRect():{left:window.innerWidth/2,top:window.innerHeight*0.7,width:0,height:0};
     d.style.left=(rect.left+rect.width/2-14)+'px';
     d.style.top=(rect.top-40)+'px';
   }
@@ -10722,12 +10666,12 @@ function flashShieldBlock(target){
   d.style.cssText='position:fixed;font-size:40px;font-weight:900;font-family:\'Cinzel\',serif;color:#fff;pointer-events:none;z-index:9999;text-shadow:0 0 10px #5dade2,0 0 24px #5dade2,0 0 48px #2980b9;letter-spacing:3px;animation:guard-block-anim 1.4s ease-out forwards;';
   if(target==='enemy'){
     const ea=document.getElementById('enemy-area');
-    const rect=ea?dwLocalRect(ea):{left:window.innerWidth/2,top:window.innerHeight*0.3,width:0,height:0};
+    const rect=ea?ea.getBoundingClientRect():{left:window.innerWidth/2,top:window.innerHeight*0.3,width:0,height:0};
     d.style.left=(rect.left+rect.width/2-50)+'px';
     d.style.top=(rect.top+rect.height/2-22)+'px';
   } else {
     const pb=document.getElementById('player-hp-bar');
-    const rect=pb?dwLocalRect(pb):{left:window.innerWidth/2,top:window.innerHeight*0.7,width:0,height:0};
+    const rect=pb?pb.getBoundingClientRect():{left:window.innerWidth/2,top:window.innerHeight*0.7,width:0,height:0};
     d.style.left=(rect.left+rect.width/2-50)+'px';
     d.style.top=(rect.top-52)+'px';
   }
@@ -10774,7 +10718,7 @@ function spawnDmgNum(txt,type){
     // プレイヤーHPバー付近（fixed座標）
     const pRow=document.getElementById('player-hp-bar');
     if(pRow){
-      const rect=dwLocalRect(pRow);
+      const rect=pRow.getBoundingClientRect();
       x=rect.left+rect.width/2-16+Math.random()*40-20;
       y=type==='player-guard'?rect.top-56:rect.top-30+Math.random()*10-5;
     } else {
@@ -10784,7 +10728,7 @@ function spawnDmgNum(txt,type){
     // 敵エリア中央（fixed座標）
     const ea=document.getElementById('enemy-area');
     if(ea){
-      const rect=dwLocalRect(ea);
+      const rect=ea.getBoundingClientRect();
       x=rect.left+rect.width/2-16+Math.random()*40-20;
       y=rect.top+rect.height/2-20+Math.random()*20-10;
     } else {
@@ -12866,11 +12810,25 @@ window.addEventListener('load',()=>{
           showResumeRunPrompt();
           return;
         }
-        // Sosiaロゴ2秒（無音）→ OP → タイトル（共通処理）
+        // Sosiaロゴ2秒（無音）
         companyScreen.style.display='flex';
         companyScreen.style.opacity='0';
         requestAnimationFrame(()=>requestAnimationFrame(()=>{ companyScreen.style.opacity='1'; }));
-        _runLogoThenOpeningTimeline();
+        setTimeout(()=>{
+          companyScreen.style.opacity='0';
+          setTimeout(()=>{
+            companyScreen.style.display='none';
+            // JSONによるOP演出 → 終了／スキップ／失敗のいずれでもタイトルへ
+            playOpening(()=>{
+              logoScreen.style.display='flex';
+              requestAnimationFrame(()=>requestAnimationFrame(()=>{
+                logoScreen.style.opacity='1';
+                _logoScreenTapReady=true;
+                _registerStartListeners();
+              }));
+            });
+          },600);
+        },2000);
       }, 800);
     };
     tapScreen.addEventListener('touchend',(e)=>{e.preventDefault();doStart();},{once:true});
@@ -12903,8 +12861,22 @@ function showLogoThenTitle(){
   logoScreen.style.opacity='0';
   logoScreen.style.display='none';
   _logoScreenTapReady=false;
-  // Sosiaロゴ2秒表示 → OP → タイトル（共通処理）
-  _runLogoThenOpeningTimeline();
+  // Sosiaロゴ2秒表示
+  setTimeout(()=>{
+    companyScreen.style.opacity='0';
+    setTimeout(()=>{
+      companyScreen.style.display='none';
+      // JSONによるOP演出 → 終了／スキップ／失敗のいずれでもタイトルへ
+      playOpening(()=>{
+        logoScreen.style.display='flex';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          logoScreen.style.opacity='1';
+          _logoScreenTapReady=true;
+          _registerStartListeners();
+        }));
+      });
+    },600);
+  },2000);
 }
 
 // エリアクリア後の「タイトルに戻る」用：会社ロゴ・OP演出を再生せず、直接タイトル画面へ戻る
@@ -13964,50 +13936,6 @@ function playEntryScene(key,onDone){
   showOv('ov-entry-scene');
   showLine(0);
 }
-
-
-// ============================================================
-// 画面サイズ切り替え（100/90/80%）
-//  倍率はlocalStorage('dw_screen_scale')に保存（既存のセーブデータ形式には触れない）。
-//  100%のときは data-dw-scale 属性自体を付けず、従来と完全に同じ状態にする。
-// ============================================================
-function dwScreenScale(){
-  const v=parseInt(document.documentElement.getAttribute('data-dw-scale')||'100',10);
-  return (v===90||v===80)?v/100:1;
-}
-// <html>が縮小されている間、fixed要素の left/top は「<html>内の座標」で解釈される。
-// getBoundingClientRect()（画面上の見た目の座標）をその座標系へ換算した矩形を返す。
-// 倍率100%のときは元の矩形をそのまま返す（従来動作）。
-function dwLocalRect(el){
-  const r=el.getBoundingClientRect(); const s=dwScreenScale();
-  if(s===1) return r;
-  const b=document.documentElement.getBoundingClientRect();
-  const left=(r.left-b.left)/s, top=(r.top-b.top)/s, width=r.width/s, height=r.height/s;
-  return {left:left,top:top,width:width,height:height,right:left+width,bottom:top+height,x:left,y:top};
-}
-function dwApplyScreenScale(pct,persist){
-  pct=(pct===90||pct===80)?pct:100;
-  const root=document.documentElement;
-  if(pct===100) root.removeAttribute('data-dw-scale'); else root.setAttribute('data-dw-scale',String(pct));
-  if(persist){ try{ localStorage.setItem('dw_screen_scale',String(pct)); }catch(e){} }
-  document.querySelectorAll('#screen-scale-box .dw-scale-btn').forEach(b=>{
-    b.classList.toggle('sel',parseInt(b.dataset.scale,10)===pct);
-  });
-  // レイアウトを再計算させる（resizeを聞いている既存処理に変更を知らせる）
-  try{ window.dispatchEvent(new Event('resize')); }catch(e){}
-}
-(function dwInitScreenScaleUI(){
-  const init=()=>{
-    const box=document.getElementById('screen-scale-box'); if(!box) return;
-    box.querySelectorAll('.dw-scale-btn').forEach(btn=>{
-      const pick=(e)=>{ e.stopPropagation(); if(e.cancelable) e.preventDefault(); dwApplyScreenScale(parseInt(btn.dataset.scale,10),true); };
-      btn.addEventListener('touchend',pick,{passive:false});
-      btn.addEventListener('click',pick);
-    });
-    dwApplyScreenScale(dwScreenScale()===1?100:Math.round(dwScreenScale()*100),false); // 選択表示を現在値に合わせる
-  };
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
-})();
 
 // 背景を「画像1枚分」ずつ下へ流し、上下がつながるようにループさせる。
 // 画像の表示高さ（=ループ1周の移動量）を実寸から求め、端数をなくして継ぎ目を防ぐ。
