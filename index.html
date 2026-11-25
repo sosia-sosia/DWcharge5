@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DUNGEON WALKER">
-<title>DUNGEON WALKER DWCver455</title>
+<title>DUNGEON WALKER DWCver458</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 :root{--bg:#07050e;--panel:#110d1a;--panel2:#180f28;--border:#2a1e42;--gold:#c9a84c;--text:#e8dcc8;--dim:#5a4a3a;--common:#8a9aaa;--uncommon:#50b450;--rare:#4a8aff;--epic:#d040ff;--legendary:#ff9500;}
@@ -571,7 +571,10 @@ html[data-dw-scale="90"] #menu-bg-view,html[data-dw-scale="80"] #menu-bg-view{he
 #sb-shield-box #sb-shield{font-size:16px;font-weight:bold;color:#7dd4f8;}
 
 /* カード獲得スライドイン */
-@keyframes card-slide-in{from{transform:translateX(130%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes card-slide-in{from{transform:translateX(130%);opacity:0}to{transform:translateX(0);opacity:var(--slide-end-op,1)}}
+/* 使用不可（暗転中）のカードは、スライドイン演出の終端も暗い不透明度にする。
+   （演出中だけ明るく見えて「暗転が一度とける」のを防ぐ。値は .card.unplayable{opacity:.34} と同じ） */
+.card.unplayable.card-slide-in{--slide-end-op:.34;}
 .card-slide-in{animation:card-slide-in .5s cubic-bezier(.2,.8,.3,1) forwards;}
 /* レア度ごとの常時グロー演出(.card.rare等)も"animation"プロパティを使っているため、
    両方を同じ要素に付けた場合、詳細度の高い方（クラス2つ分の.card.rare）だけが適用され、
@@ -796,6 +799,9 @@ html[data-dw-scale="90"] #menu-bg-view,html[data-dw-scale="80"] #menu-bg-view{he
   50%{box-shadow:0 0 24px rgba(231,76,60,1),0 0 40px rgba(255,120,0,.6);}
 }
 #card-gauge-box.charge-full{animation:charge-box-full-glow 0.9s ease-in-out infinite!important;}
+/* 敵ターン中・「あなたのターン」表示中は、チャージ枠を暗転して押せなくする（手札が使用不可で暗くなるのと同じ扱い） */
+#card-gauge-box.charge-locked{filter:brightness(.38) grayscale(.55);pointer-events:none;transition:filter .2s;}
+#card-gauge-box.charge-locked.charge-full{animation:none !important;}
 /* 呪縛アクティブ時のみglow */
 @keyframes curse-box-active-glow{
   0%,100%{box-shadow:0 0 12px rgba(231,76,60,.7);}
@@ -882,7 +888,7 @@ html[data-dw-scale="90"] #menu-bg-view,html[data-dw-scale="80"] #menu-bg-view{he
 
 <div id="tap-to-start-screen" style="display:none;position:fixed;inset:0;background:#07050e;z-index:1100;align-items:center;justify-content:center;flex-direction:column;gap:24px;cursor:pointer;touch-action:manipulation;transition:opacity .3s;opacity:1;">
   <div style="font-family:'Cinzel',serif;font-size:22px;color:#c9a84c;letter-spacing:6px;text-shadow:0 0 24px rgba(201,168,76,.8);animation:logo-pulse 1.5s ease-in-out infinite;">DUNGEON WALKER</div>
-  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v455</div>
+  <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.45);letter-spacing:2px;">v458</div>
   <div style="font-family:'Cinzel',serif;font-size:13px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;">▶ TAP TO START</div>
 </div>
 <div id="opening-screen" style="display:none;position:fixed;inset:0;background:#000;z-index:1004;opacity:1;touch-action:none;overflow:hidden;">
@@ -922,7 +928,7 @@ html[data-dw-scale="90"] #menu-bg-view,html[data-dw-scale="80"] #menu-bg-view{he
     <div style="font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#b8d4ff;letter-spacing:8px;text-shadow:0 0 20px rgba(100,160,255,.8),0 0 40px rgba(100,160,255,.3),1px 1px 0 #0a2060;text-align:center;">CHARGE</div>
     <div style="height:2px;width:220px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin-top:6px;"></div>
     <div style="font-family:'Cinzel',serif;font-size:10px;color:rgba(201,168,76,.5);letter-spacing:3px;">CARD BATTLE RPG</div>
-    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver455</div>
+    <div style="font-family:sans-serif;font-size:9px;color:rgba(201,168,76,.35);letter-spacing:1px;margin-top:2px;">ver458</div>
     <div style="font-family:'Cinzel',serif;font-size:12px;color:rgba(201,168,76,.7);letter-spacing:4px;animation:logo-pulse 1.5s ease-in-out infinite;margin-top:10px;">▶ TAP TO START</div>
   </div>
 
@@ -3730,7 +3736,7 @@ function _startStageBattle(){
   G.berserkManaBonus=0; // 狂戦士マナボーナスリセット（ステージ毎にリセット）
   G.drawPile=shuffle([...G.deck]); G.discard=[]; G.hand=[];
   if(G.areaId===7){ G.deck=['strike','guard','heal']; G.hand=['strike','guard','heal']; G.drawPile=[]; G.discard=[]; } // チュートリアル：専用の固定手札
-  G.turnCount=1; G.phase='player'; handPage=0; selectedCardIdx=-1;
+  G.turnCount=1; G.phase='player'; G._turnIntroLock=false; handPage=0; selectedCardIdx=-1;
   // 敵スプライト設定（imgタグ方式）
   const sp=document.getElementById('enemy-sprite');
   if(sp){
@@ -3996,6 +4002,7 @@ function playCard(idx, _isChain){
   const cid = c ? c.id : null;
   if(!c||!cid)return;
   if(G.phase!=='player' && !G._bypassPhaseGuard)return;
+  if(G._turnIntroLock && !_isChain && !G._bypassPhaseGuard)return; // 「あなたのターン」表示中は使用不可
   if(!_isChain && G.chainNoSkill && c.type==='skill'){ dwRejectFeedback(document.getElementById('hand-cards')); return; }
   // チュートリアル：UI層（canUse）の判定を経由しない呼び出しに対する保険。対象外の操作は実行しない。
   if(!_isChain && G.areaId===7){
@@ -5182,6 +5189,9 @@ function endTurn(){
     _fudouDelay=3300;
   }
   G.phase='enemy';
+  // ターン終了の瞬間から「あなたのターン」表示が終わるまで、手札・チャージを1つの連続したロックで操作不可にする
+  G._turnIntroLock=true;
+  dwSyncChargeLock();
   // エリア効果：冷気（氷壁の迷宮）マナを使い切らずにターン終了した場合、次のターン開始時のマナ-1
   {
     const _aefCold=AREA_DATA[G.areaId]&&AREA_DATA[G.areaId].areaEffect&&AREA_DATA[G.areaId].areaEffect.id==='coldair'?AREA_DATA[G.areaId].areaEffect:null;
@@ -5835,6 +5845,9 @@ function enemyTurn(){
 // ※この関数が呼ばれる時点では G.phase!=='player'（=ターン開始処理が未実行）であることが前提。
 function performPlayerTurnStart(isRestore){
     G.phase='player'; G.turnCount++;
+    // ロックはターン終了時から継続中。「あなたのターン」の表示が終わるまで解除しない（中断復帰時は表示しないので解除）
+    if(isRestore) G._turnIntroLock=false;
+    dwSyncChargeLock();
     // 敵ターン終了：手札を捨て札に（虚弱Dは残す）
     const kyojakuInHand=G.hand.filter(id=>id==='bougai_kyojaku');
     const otherHand=G.hand.filter(id=>id!=='bougai_kyojaku');
@@ -5985,7 +5998,10 @@ function performPlayerTurnStart(isRestore){
     }
     G._skipDrawAnim=true; drawCards(5+(G.nextTurnDrawBonusPending||0), true); G.nextTurnDrawBonusPending=0; G._skipDrawAnim=false; updateUI(); updateIntent();
     addLog('── ターン'+G.turnCount+' ──','sys');
-    if(!isRestore) showTurnSlide('⚔️ あなたのターン','#4ae080');
+    if(!isRestore){
+      showTurnSlide('⚔️ あなたのターン','#4ae080',()=>{ dwReleaseTurnIntroLock(); }); // 表示が終わったら操作可能にする
+      setTimeout(()=>{ dwReleaseTurnIntroLock(); },4500); // 保険：何らかの理由で終了が通知されなくても、操作不能のままにしない
+    }
     document.getElementById('btn-end').classList.remove('disabled');
     const tc=document.getElementById('turn-counter');if(tc)tc.textContent='T'+G.turnCount;
     // 呪縛警告：ターン5になったら「あと1ターンで発動」警告
@@ -9053,7 +9069,7 @@ function renderHand(){
     if(c.type==='bougai'){
       bougaiUsable=G.mana>=effectiveCost;
     }
-    const ok=(c.type==='another'?((G.chargeCount||0)>=(c.chargeRequire||0)):(G.mana>=effectiveCost))&&G.phase==='player'&&bougaiUsable;
+    const ok=(c.type==='another'?((G.chargeCount||0)>=(c.chargeRequire||0)):(G.mana>=effectiveCost))&&G.phase==='player'&&!G._turnIntroLock&&bougaiUsable;
     const d=document.createElement('div');
     const isSelected=(selectedCardIdx===i);
     const isPoisonKillLocked = c.id==='poisonKill' && (!G.enemy || G.enemyPoison<10);
@@ -10367,6 +10383,25 @@ function showChargeActivate(ct){
   },850);
 }
 
+// ===== 操作ロック（手札・チャージ共通）=====
+//  ターン終了の瞬間 ～ 次の「あなたのターン」の表示が終わるまで、手札・チャージとも続けて操作できない（G._turnIntroLock）。
+//  （敵ターン中・ターン開始表示中を分けず、1つのロックで連続して扱う。G.phase==='enemy'も保険として判定）
+function dwIsChargeLocked(){
+  return !!(typeof G!=='undefined' && G && (G.phase==='enemy'||G.phase==='gameover'||G._turnIntroLock===true));
+}
+function dwSyncChargeLock(){
+  const b=document.getElementById('card-gauge-box'); if(!b) return;
+  const lk=dwIsChargeLocked();
+  b.classList.toggle('charge-locked',lk);
+  b.style.pointerEvents=lk?'none':'';
+}
+function dwReleaseTurnIntroLock(){
+  if(typeof G==='undefined'||!G||!G._turnIntroLock) return;
+  G._turnIntroLock=false;
+  dwSyncChargeLock();
+  // 手札を再描画して、使用可能なカードの暗転を解除する
+  try{ if(G.phase==='player') renderHand(); }catch(e){ console.warn(e); }
+}
 function updateGaugeLamps(){
   const el=document.getElementById('gauge-lamps');
   if(!el) return;
@@ -10386,6 +10421,7 @@ function updateGaugeLamps(){
     box.style.pointerEvents='';
     box.style.opacity='';
   }
+  dwSyncChargeLock(); // 敵ターン中・ターン開始表示中は暗転して押せない
 
   // lampの数が変わった時だけDOM再構築
   if(el.children.length!==max||el._lastChargeType!==G.chargeType){
@@ -11676,7 +11712,7 @@ function openChargeInfo(){
   const isFull=ct&&G.chargeCount>=ct.maxCount;
   const hakiMax=false; // 狂戦士は回数制限なし
   const isEffectActive=G.chargeEffectActive&&G.chargeType!=='dokushi';
-  const canActivate=isFull&&!hakiMax&&(G.phase==='player'||G.phase==='block')&&!isEffectActive&&!G.chargeUsedThisTurn;
+  const canActivate=isFull&&!hakiMax&&(G.phase==='player'||G.phase==='block')&&!G._turnIntroLock&&!isEffectActive&&!G.chargeUsedThisTurn;
 
   if(el&&ct){
     el.innerHTML='<div style="background:rgba(0,0,0,.6);border:2px solid '+ct.color+';border-radius:10px;padding:14px 16px;font-family:sans-serif;">'
@@ -11710,6 +11746,7 @@ window.openChargeInfo=openChargeInfo;
 // チャージ効果を手動実行する関数
 function executeChargeEffect(){
   if(!G.chargeType||(G.phase!=='player'&&G.phase!=='block')) return;
+  if(G._turnIntroLock) return; // 「あなたのターン」表示中は発動不可
   if(G.areaId===7 && tutorialCurrentAction()!=='charge'){
     dwRejectFeedback(document.getElementById('card-gauge-box'));
     return;
@@ -15267,10 +15304,10 @@ function showStageSlide(stageText, enemyName){
     },1400);
   }));
 }
-function showTurnSlide(text,color){
+function showTurnSlide(text,color,onEnd){
   const el=document.getElementById('turn-slide');
   const inner=document.getElementById('turn-slide-inner');
-  if(!el||!inner)return;
+  if(!el||!inner){ if(onEnd) onEnd(); return; }
   inner.textContent=text;
   inner.style.borderColor=color||'#c9a84c';
   inner.style.color=color||'#fff';
@@ -15283,7 +15320,7 @@ function showTurnSlide(text,color){
     setTimeout(()=>{
       el.style.transition='transform 0.7s cubic-bezier(.6,0,.8,.3)';
       el.style.transform='translate(-50%,-50%) translateX(120vw)';
-      setTimeout(()=>{el.style.display='none';},750);
+      setTimeout(()=>{el.style.display='none'; if(onEnd) onEnd();},750); // 表示が完全に消えた時点でコールバック
     },1800);
   }));
 }
